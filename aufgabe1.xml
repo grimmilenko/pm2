@@ -1,17 +1,19 @@
 <?xml version="1.0" ?>
-<name="Rasberry Pi - Model b"/>
-<ip="192.168.2.1"/>
-<sensoren>
-	<ort="wohnzimmer"/>
-	<typ="Temperatur"/>
-	<wert="22.4"/>
-</sensoren>
-<sensoren>
-	<ort="Küche"/>
-	<wert="-1.2323"/>
-</sensoren>
-<sensoren>
-	<ort="Badezimmer"/>
-	<typ="Luftfeuchtigkeit"/>
-	<wert="63.8"/>
-</sensoren>
+<!DOCTYPE PcListe SYSTEM 'aufgabe1.dtd'>
+
+<PcListe name="Rasberry Pi - Model b" ip="192.168.2.1">
+	<sensoren>
+		<ort="Wohnzimmer"/>
+		<typ="Temperatur"/>
+		<wert="22.4"/>
+	</sensoren>
+	<sensoren>
+		<ort="Küche"/>
+		<wert="-1.2323"/>
+	</sensoren>
+	<sensoren>
+		<ort="Badezimmer"/>
+		<typ="Luftfeuchtigkeit"/>
+		<wert="63.8"/>
+	</sensoren>
+</PcListe>

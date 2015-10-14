@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE PcListe [
+<!ELEMENT PcListe (sensoren)*
+<!ATTLIST PcListe name CDATA #REQUIRED ip CDATA #REQUIRED>
+
+<!ELEMENT sensoren (ort, typ?, wert)>
+<!ATTLIST sensoren ort CDATA #REQUIRED typ CDATA #IMPLIED wert CDATA #REQUIRED>
+]>
