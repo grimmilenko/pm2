@@ -15,9 +15,27 @@ package aufgabe1;
  *
  */
 public class Pruefungsleistung {
-
+	/**
+	 * Name des Moduls
+	 */
 	private String modul;
+	/**
+	 * Note der Pruefung
+	 */
 	private int note;
+
+	/**
+	 * Konstruktor
+	 * 
+	 * @param modul
+	 *            Name des Moduls
+	 * @param note
+	 *            Note des Moduls
+	 */
+	public Pruefungsleistung(String modul, int note) {
+		this.modul = modul;
+		this.note = note;
+	}
 
 	/**
 	 * Getter
@@ -35,5 +53,15 @@ public class Pruefungsleistung {
 	 */
 	public int getNote() {
 		return note;
+	}
+
+	/**
+	 * Ausgabe-Methode
+	 * 
+	 * @return Gibt einen String zurueck mit Namen des Moduls und der
+	 *         zugehoerigen Note
+	 */
+	public String gibAus() {
+		return "\nName des Moduls: " + modul + "\n" + "Note: " + note;
 	}
 }

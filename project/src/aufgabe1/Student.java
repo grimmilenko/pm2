@@ -7,6 +7,9 @@
 
 package aufgabe1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Klasse zur Darstellung eines Studenten
  * 
@@ -14,9 +17,22 @@ package aufgabe1;
  *
  */
 public class Student implements Comparable<Student> {
+	/**
+	 * Vorname des Studenten
+	 */
 	private String vorname;
+	/**
+	 * Nachname des Studenten
+	 */
 	private String nachname;
+	/**
+	 * Matrikelnummer des Studenten
+	 */
 	private int matrikelnummer;
+	/**
+	 * Liste fuer abgelegte Pruefungen
+	 */
+	private List<Pruefungsleistung> liste;
 
 	/**
 	 * Konstruktor der Klasse Student
@@ -32,6 +48,7 @@ public class Student implements Comparable<Student> {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.matrikelnummer = matrikelnummer;
+		liste = new ArrayList<Pruefungsleistung>();
 	}
 
 	/**
@@ -59,6 +76,40 @@ public class Student implements Comparable<Student> {
 	 */
 	public int getMatrikelnummer() {
 		return matrikelnummer;
+	}
+
+	/**
+	 * Methode zur Ausgabe der Inhalte eines Studenten
+	 */
+	public String toString() {
+		return "Vorname: " + vorname + "\n" + "Nachname: " + nachname + "\n"
+				+ "Matrikelnummer: " + matrikelnummer + "\n"
+				+ "Erbrachte Leistungen: \n" + gibListeAus();
+	}
+
+	/**
+	 * Methode zum hinzufuegen einer Pruefung
+	 * 
+	 * @param modul
+	 *            Name des Moduls
+	 * @param note
+	 *            Note des Moduls
+	 */
+	public void addPruefung(String modul, int note) {
+		liste.add(new Pruefungsleistung(modul, note));
+	}
+
+	/**
+	 * Methode zur Ausgabe der erbrachten Leistungen eines Studenten
+	 * 
+	 * @return String mit allen erfüllten Leistungen
+	 */
+	public String gibListeAus() {
+		String ausgabe = "";
+		for (Pruefungsleistung x : liste) {
+			ausgabe = ausgabe + x.gibAus();
+		}
+		return ausgabe;
 	}
 
 	@Override
