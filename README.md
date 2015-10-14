@@ -1,4 +1,4 @@
-# pm2
+# Programmiermethodik 2
 
 In diesem Repository werden alle Praktika des Kurses Programmiermethodik 2 von Jnk gespeichert.
 
