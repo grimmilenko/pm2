@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PcListe SYSTEM 'aufgabe1.dtd'>
+<!DOCTYPE PcListe SYSTEM 'https://github.com/grimmilenko/pm2/blob/master/aufgabe1.dtd'>
 
 <PcListe name="Rasberry Pi - Model b" ip="192.168.2.1">
 	<sensoren>
