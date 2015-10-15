@@ -62,6 +62,6 @@ public class Pruefungsleistung {
 	 *         zugehoerigen Note
 	 */
 	public String gibAus() {
-		return "\nName des Moduls: " + modul + "\n" + "Note: " + note;
+		return "\nModul: " + modul + "\n" + "Note: " + note;
 	}
 }
