@@ -14,17 +14,18 @@ package aufgabe1;
  *
  */
 public class TestMain {
-
 	/**
 	 * Main-Methode zum Testen
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
 		Student student = new Student("Nico", "Grimm", 2058712);
 		student.addPruefung("Mathe 1", 12);
 		student.addPruefung("Mathe 2", 10);
 		student.addPruefung("Programmieren", 15);
 		System.out.println(student.toString());
+
 	}
 }

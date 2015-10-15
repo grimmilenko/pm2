@@ -8,6 +8,7 @@
 package aufgabe1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Nico Grimm und Marco Colbow
  *
  */
-public class Student implements Comparable<Student> {
+public class Student implements Comparable<Student>, Comparator<Student> {
 	/**
 	 * Vorname des Studenten
 	 */
@@ -114,13 +115,22 @@ public class Student implements Comparable<Student> {
 
 	@Override
 	public int compareTo(Student other) {
-		int erg = 0;
 		// Vegleich der Matrikelnummern
 		if (getMatrikelnummer() < other.getMatrikelnummer()) {
-			erg = 1;
+			return -1;
 		} else if (getMatrikelnummer() > other.getMatrikelnummer()) {
-			erg = -1;
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public int compare(Student o1, Student o2) {
+		int erg = o1.getNachname().compareTo(o2.getNachname());
+		if (erg == 0) {
+			return o1.getVorname().compareTo(o2.getVorname());
 		}
 		return erg;
+
 	}
 }
