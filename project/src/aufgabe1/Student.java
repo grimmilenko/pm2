@@ -115,6 +115,9 @@ public class Student implements Comparable<Student>, Comparator<Student> {
 
 	@Override
 	public int compareTo(Student other) {
+		if (other == null) {
+			return 0;
+		}
 		// Vegleich der Matrikelnummern
 		if (getMatrikelnummer() < other.getMatrikelnummer()) {
 			return -1;
@@ -126,10 +129,21 @@ public class Student implements Comparable<Student>, Comparator<Student> {
 
 	@Override
 	public int compare(Student o1, Student o2) {
+		if (o1 == null && o2 == null) {
+			return 0;
+		}
+		if (o1 == null) {
+			return 1;
+		} else if (o2 == null) {
+			return -1;
+		}
+
+		// hier stimmt noch nicht alles!
 		int erg = o1.getNachname().compareTo(o2.getNachname());
 		if (erg == 0) {
 			return o1.getVorname().compareTo(o2.getVorname());
 		}
+
 		return erg;
 
 	}
