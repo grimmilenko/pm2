@@ -138,13 +138,21 @@ public class Student implements Comparable<Student>, Comparator<Student> {
 			return -1;
 		}
 
-		// hier stimmt noch nicht alles!
-		int erg = o1.getNachname().compareTo(o2.getNachname());
-		if (erg == 0) {
-			return o1.getVorname().compareTo(o2.getVorname());
+		int ergNachname = o1.getNachname().compareTo(o2.getNachname());
+		if (ergNachname < 0) {
+			return -1;
+		} else if (ergNachname > 0) {
+			return 1;
+		} else if (ergNachname == 0) {
+			int ergVorname = o1.getVorname().compareTo(o2.getVorname());
+			if (ergVorname < 0) {
+				return -1;
+			} else if (ergVorname > 0) {
+				return 1;
+			}
 		}
 
-		return erg;
+		return 0;
 
 	}
 }
