@@ -16,6 +16,12 @@ public class ArrayListe<T> {
 		elemente = new Object[0];
 	}
 
+	/**
+	 * Methode zum hinzufuegen einer Liste in eine andere Liste
+	 * 
+	 * @param t
+	 *            Liste die hinzugefuegt werden soll
+	 */
 	public void hinzufuegen(ArrayListe<T> t) {
 		int neueLaenge = elemente.length + t.getAnzahlElemente();
 		Object[] newElemente = new Object[neueLaenge];
@@ -23,8 +29,19 @@ public class ArrayListe<T> {
 		elemente = newElemente;
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @param index
+	 *            Index einer Liste
+	 * @return Gibt das Element zurueck, welches sich an dem Index befindet
+	 */
 	public T get(int index) {
-		return (T) elemente[index];
+		if (index <= elemente.length) {
+			return (T) elemente[index];
+		} else {
+			return null;
+		}
 	}
 
 	public void entfernen(ArrayListe<T> t) {
@@ -42,13 +59,11 @@ public class ArrayListe<T> {
 		return ausgabe;
 	}
 
-	public void getKleinstesElement() {
-		T kleinstesElement;
+	public T getKleinstesElement() {
+		T kleinstesElement = (T) elemente[0];
 		for (int i = 0; i <= elemente.length; i++) {
-			// if (elemente[i] < kleinstesElement){
-
-			// }
 		}
+		return kleinstesElement;
 
 	}
 }
