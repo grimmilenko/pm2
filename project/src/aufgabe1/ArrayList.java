@@ -26,6 +26,7 @@ public class ArrayList<T> {
 		for (int i = 0; i <= numberOfElements; i++) {
 
 		}
+		numberOfElements++;
 	}
 
 	/**
@@ -48,7 +49,7 @@ public class ArrayList<T> {
 	 *            Item that you want to remove
 	 */
 	public void remove(T item) {
-
+		numberOfElements--;
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class ArrayList<T> {
 	 */
 	public void removeAtIndex(int index) {
 		checkIndex(index, numberOfElements - 1);
-
+		numberOfElements--;
 	}
 
 	/**
