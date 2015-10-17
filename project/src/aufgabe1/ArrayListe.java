@@ -7,6 +7,8 @@
 
 package aufgabe1;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 public class ArrayListe<T> {
 
 	int anzahlElemente;
@@ -17,16 +19,17 @@ public class ArrayListe<T> {
 	}
 
 	/**
-	 * Methode zum hinzufuegen einer Liste in eine andere Liste
+	 * Methode zum hinzufuegen eines Elements in die Liste
 	 * 
 	 * @param t
-	 *            Liste die hinzugefuegt werden soll
+	 *            Element welches hinzugefuegt werden soll
 	 */
-	public void hinzufuegen(ArrayListe<T> t) {
-		int neueLaenge = elemente.length + t.getAnzahlElemente();
-		Object[] newElemente = new Object[neueLaenge];
-		System.arraycopy(t, 0, newElemente, 0, newElemente.length);
-		elemente = newElemente;
+	public void hinzufuegen(T t) {
+		Object[] zwischenSpeicher = new Object[elemente.length + 1];
+		System.arraycopy(elemente, 0, zwischenSpeicher, 0,
+				zwischenSpeicher.length);
+		zwischenSpeicher[zwischenSpeicher.length + 1] = t;
+		elemente = zwischenSpeicher;
 	}
 
 	/**
@@ -44,7 +47,22 @@ public class ArrayListe<T> {
 		}
 	}
 
-	public void entfernen(ArrayListe<T> t) {
+	/**
+	 * Methode zum entfernen eines bestimmten Elements in der Liste
+	 * 
+	 * @param t
+	 *            Element welches entfernt werden soll
+	 */
+	public void entfernen(T t) {
+		if (elemente.length == 0) {
+			return;
+		} else {
+			for (int i = 0; i < elemente.length; i++) {
+				if (elemente[i].equals(t)) {
+					elemente[i] = elemente[i + 1];
+				}
+			}
+		}
 	}
 
 	public void entferneElementAnIndex(int index) {

@@ -116,7 +116,7 @@ public class Student implements Comparable<Student>, Comparator<Student> {
 	@Override
 	public int compareTo(Student other) {
 		if (other == null) {
-			return 0;
+			return -1;
 		}
 		// Vegleich der Matrikelnummern
 		if (getMatrikelnummer() < other.getMatrikelnummer()) {
