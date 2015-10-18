@@ -5,7 +5,9 @@
  * Aufgabe 1
  */
 
-package aufgabe1;
+package aufgabenblatt1;
+
+import java.util.Arrays;
 
 public class ArrayListe<T> {
 
@@ -62,18 +64,34 @@ public class ArrayListe<T> {
 			}
 		}
 	}
-
+    /**
+     *  Entfernt ein Element an einem bestimmten Index
+     * @param index Der Index an dem das Element gelöscht werden soll
+     */
 	public void entferneElementAnIndex(int index) {
+		anzahlElemente--;
+		//checkIndex(index, anzahlElemente);
+		for (int i = 0; i < elemente.length; i++) {
+			if (i > index) {
+				elemente[i - 1] = elemente[i];
+			}
+		}
+		elemente = Arrays.copyOfRange(elemente, 0, anzahlElemente);
+
 	}
 
 	public int getAnzahlElemente() {
 		return elemente.length;
 	}
 
+	@Override
 	public String toString() {
 		String ausgabe = "";
+		for (int i = 0; i < elemente.length; i++) {
+			ausgabe = ausgabe + elemente[i];
+			}
 		return ausgabe;
-	}
+		}	
 
 	public T getKleinstesElement() {
 		T kleinstesElement = (T) elemente[0];
@@ -83,3 +101,5 @@ public class ArrayListe<T> {
 
 	}
 }
+
+  
