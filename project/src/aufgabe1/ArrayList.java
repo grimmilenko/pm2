@@ -1,5 +1,7 @@
 package aufgabe1;
 
+import java.util.Arrays;
+
 public class ArrayList<T> {
 
 	private int numberOfElements = 0;
@@ -54,7 +56,7 @@ public class ArrayList<T> {
 	 *            Item that you want to remove
 	 */
 	public void remove(T item) {
-		numberOfElements--;
+		removeAtIndex(getIndexOf(item));
 	}
 
 	/**
@@ -64,8 +66,15 @@ public class ArrayList<T> {
 	 *            Index of your list
 	 */
 	public void removeAtIndex(int index) {
-		checkIndex(index, numberOfElements - 1);
 		numberOfElements--;
+		checkIndex(index, numberOfElements);
+		for (int i = 0; i < list.length; i++) {
+			if (i > index) {
+				list[i - 1] = list[i];
+			}
+		}
+		list = Arrays.copyOfRange(list, 0, numberOfElements);
+
 	}
 
 	/**
@@ -129,5 +138,21 @@ public class ArrayList<T> {
 	 */
 	public int getSize() {
 		return list.length;
+	}
+
+	/**
+	 * Method to find the index of your item
+	 * 
+	 * @param item
+	 *            Item your want to find
+	 * @return Returns the index of your item
+	 */
+	public int getIndexOf(T item) {
+		for (int i = 0; i < list.length; i++) {
+			if (list[i].equals(item)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }
