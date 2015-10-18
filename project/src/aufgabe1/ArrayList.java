@@ -88,7 +88,11 @@ public class ArrayList<T> {
 
 	@Override
 	public String toString() {
-		return "";
+		String result = "";
+		for (int i = 0; i < list.length; i++) {
+			result = result + list[i];
+		}
+		return result;
 	}
 
 	/**
