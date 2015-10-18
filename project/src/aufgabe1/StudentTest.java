@@ -5,7 +5,7 @@
  * Aufgabe 1
  */
 
-package aufgabe1;
+package aufgabenblatt1;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class StudentTest {
 
-	@Test
+	 @Test
 	public void testCompareTo() {
 		Student student1 = new Student("Nico", "Grimm", 2058712);
 		Student student2 = new Student("Marco", "Colbow", 2264187);
@@ -29,7 +29,7 @@ public class StudentTest {
 		assertEquals("Fehler beim Vergleich der Matrikelnummer!",
 				student1.compareTo(student1), 0);
 		assertEquals("Fehler beim Vergleich der Matrikelnummer mit null!",
-				student1.compareTo(null), 0);
+				student1.compareTo(null), -1);
 
 	}
 
