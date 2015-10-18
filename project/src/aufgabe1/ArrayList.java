@@ -2,17 +2,22 @@ package aufgabe1;
 
 public class ArrayList<T> {
 
-	private int numberOfElements;
+	private int numberOfElements = 0;
 	private T[] list;
 
 	private static final int INDEX_LOWER_BOUND = 0;
+	private static final int DEFAULT_SIZE = 0;
+
+	public ArrayList() {
+		this(DEFAULT_SIZE);
+	}
 
 	/**
-	 * Default-Constructor
+	 * Constructor
 	 */
-	public ArrayList() {
+	public ArrayList(int size) {
 		numberOfElements = 0;
-		list = (T[]) new Object[0];
+		list = (T[]) new Object[size];
 	}
 
 	/**
@@ -22,10 +27,10 @@ public class ArrayList<T> {
 	 *            Item you want to add to the list
 	 */
 	public void add(T item) {
-		resize(list.length * 2);
-		for (int i = 0; i <= numberOfElements; i++) {
-
+		if (numberOfElements == list.length) {
+			resize(list.length + 1);
 		}
+		list[list.length - 1] = item;
 		numberOfElements++;
 	}
 
@@ -69,7 +74,7 @@ public class ArrayList<T> {
 	 * @return Returns the number of elements in your list
 	 */
 	public int getNumberOfElements() {
-		return list.length;
+		return numberOfElements;
 	}
 
 	@Override
@@ -115,5 +120,14 @@ public class ArrayList<T> {
 			tmp[i] = list[i];
 		}
 		list = tmp;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return
+	 */
+	public int getSize() {
+		return list.length;
 	}
 }

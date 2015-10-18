@@ -7,8 +7,6 @@
 
 package aufgabe1;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
 public class ArrayListe<T> {
 
 	int anzahlElemente;
