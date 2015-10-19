@@ -1,5 +1,6 @@
-package aufgabe1;
+package aufgabenblatt1;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class ArrayList<T> {
@@ -20,6 +21,7 @@ public class ArrayList<T> {
 	public ArrayList(int size) {
 		numberOfElements = 0;
 		list = (T[]) new Object[size];
+		//list = (T[]) Array.newInstance(Object.class, size);
 	}
 
 	/**
@@ -100,9 +102,15 @@ public class ArrayList<T> {
 	 * 
 	 * @return Returns the smallest element
 	 */
-	public T getSmallestElement() {
-		return (T) list[0];
-	}
+	// public T getSmallestElement() {
+	// T smallestElement = list[0];
+	// for (int i = 1; i < list.length; i++) {
+	// if (smallestElement.compareTo(list[i]) > 0) {
+	// smallestElement = list[i];
+	// }
+	// }
+	// return smallestElement;
+	// }
 
 	/**
 	 * Method to check if your index is available in your list
@@ -158,5 +166,16 @@ public class ArrayList<T> {
 			}
 		}
 		return -1;
+	}
+
+	public int sum() throws Exception {
+		int result = 0;
+		if (!(list[0] instanceof Integer)) {
+			throw new Exception("list does not contain integer");
+		}
+		for (int i = 0; i < list.length; i++) {
+			result += (int) list[i];
+		}
+		return result;
 	}
 }

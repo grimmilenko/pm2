@@ -5,7 +5,7 @@
  * Aufgabe 1
  */
 
-package aufgabe1;
+package aufgabenblatt1;
 
 import java.util.ArrayList;
 import java.util.Comparator;

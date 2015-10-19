@@ -1,4 +1,4 @@
-package aufgabe1;
+package aufgabenblatt1;
 
 import static org.junit.Assert.*;
 
@@ -59,6 +59,13 @@ public class TestArrayList {
 
 	@Test
 	public void testGetSmallestElement() {
+		ArrayList<Integer> test = new ArrayList<Integer>();
+		test.add(1);
+		test.add(2);
+		test.add(3);
+		test.add(4);
+		test.add(5);
+		// assertEquals("Error!", (int) test.getSmallestElement(), 1);
 	}
 
 	@Test
@@ -68,5 +75,28 @@ public class TestArrayList {
 		test.add("hello");
 		assertEquals("Error", test.get(0), null);
 		assertEquals("Error", test.get(1).equals("hello"), true);
+	}
+
+	@Test
+	public void testSum() {
+		ArrayList<Integer> test = new ArrayList<Integer>();
+		test.add(5);
+		test.add(15);
+		test.add(20);
+		test.add(60);
+		try {
+			assertEquals("Error!", test.sum(), 100);
+		} catch (Exception e) {
+
+		}
+
+		ArrayList<String> test1 = new ArrayList<String>();
+		test1.add("hi");
+		test1.add("help");
+		try {
+			assertEquals("Error!", test1.sum(), 0);
+		} catch (Exception e) {
+
+		}
 	}
 }

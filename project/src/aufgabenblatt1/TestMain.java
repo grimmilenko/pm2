@@ -5,7 +5,7 @@
  * Aufgabe 1
  */
 
-package aufgabe1;
+package aufgabenblatt1;
 
 /**
  * Klasse zum Testen
