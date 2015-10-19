@@ -9,14 +9,35 @@ package aufgabenblatt1;
 
 import java.util.Arrays;
 
+/**
+ * Klasse zur Darstellung einer Array Liste
+ * 
+ * @author Marco, Nico
+ *
+ * @param <T> Generischer Typ
+ */
 public class ArrayListe<T> {
 
 	int anzahlElemente;
 	private Object[] elemente;
 
+	/**
+	 * Default Konstruktor
+	 */
+	public ArrayListe() {
+
+		this(0);
+	}
+
+	/**
+	 * Konstruktor mit bestimmter Größe
+	 * 
+	 * @param groesse
+	 *            die Größe der Liste
+	 */
 	public ArrayListe(int groesse) {
-		//elemente = new Object[0];
-		 elemente = (T[]) new Object[groesse];
+		// elemente = new Object[0];
+		elemente = (T[]) new Object[groesse];
 	}
 
 	/**
@@ -26,24 +47,32 @@ public class ArrayListe<T> {
 	 *            Element welches hinzugefuegt werden soll
 	 */
 	public void hinzufuegen(T t) {
-		/**Object[] zwischenSpeicher = new Object[elemente.length + 1];
-		System.arraycopy(elemente, 0, zwischenSpeicher, 0,
-				zwischenSpeicher.length);
-		
-		zwischenSpeicher[zwischenSpeicher.length -1] = t;
-		elemente = zwischenSpeicher;*/
-		
+		/**
+		 * Object[] zwischenSpeicher = new Object[elemente.length + 1];
+		 * System.arraycopy(elemente, 0, zwischenSpeicher, 0,
+		 * zwischenSpeicher.length);
+		 * 
+		 * zwischenSpeicher[zwischenSpeicher.length -1] = t; elemente =
+		 * zwischenSpeicher;
+		 */
+
 		if (anzahlElemente == elemente.length) {
 			resize(elemente.length + 1);
 		}
-		elemente[elemente.length -1 ] = t;
+		elemente[elemente.length - 1] = t;
 		anzahlElemente++;
 	}
-	
+
+	/**
+	 * Passt die größe der Liste an
+	 * 
+	 * @param size
+	 *            neue größe der Liste
+	 */
 	private void resize(int size) {
 		T[] tmp = (T[]) new Object[size];
 		for (int i = 0; i < anzahlElemente; i++) {
-			tmp[i] =(T) elemente[i];
+			tmp[i] = (T) elemente[i];
 		}
 		elemente = tmp;
 	}
@@ -80,13 +109,16 @@ public class ArrayListe<T> {
 			}
 		}
 	}
-    /**
-     *  Entfernt ein Element an einem bestimmten Index
-     * @param index Der Index an dem das Element gelöscht werden soll
-     */
+
+	/**
+	 * Entfernt ein Element an einem bestimmten Index
+	 * 
+	 * @param index
+	 *            Der Index an dem das Element gelöscht werden soll
+	 */
 	public void entferneElementAnIndex(int index) {
 		anzahlElemente--;
-		//checkIndex(index, anzahlElemente);
+		// checkIndex(index, anzahlElemente);
 		for (int i = 0; i < elemente.length; i++) {
 			if (i > index) {
 				elemente[i - 1] = elemente[i];
@@ -96,26 +128,58 @@ public class ArrayListe<T> {
 
 	}
 
+	/**
+	 * gibt anzahl Elemente aus
+	 * 
+	 * @return die Anzahl der Elemente
+	 */
 	public int getAnzahlElemente() {
 		return elemente.length;
 	}
 
-	@Override
+	/**
+	 * ToString Methode
+	 */
 	public String toString() {
 		String ausgabe = "";
 		for (int i = 0; i < elemente.length; i++) {
 			ausgabe = ausgabe + elemente[i];
-			}
+		}
 		return ausgabe;
-		}	
+	}
 
-	public T getKleinstesElement() {
+	/**
+	 * Gibt das kleinste Element aus
+	 * 
+	 * @return das kleinste Element
+	 */
+
+	public <T extends Comparable<T>> T getKleinstesElement() {
 		T kleinstesElement = (T) elemente[0];
-		for (int i = 0; i <= elemente.length; i++) {
+		for (int i = 1; i < elemente.length; i++) {
+			if (kleinstesElement.compareTo((T) elemente[i]) > 0) {
+				kleinstesElement = (T) elemente[i];
+			}
 		}
 		return kleinstesElement;
+	}
 
+	/**
+	 * Summiert alle Elemente in der Liste, wenn sie Integer Werte sind
+	 * 
+	 * @return Die Summe aller Elemente
+	 * @throws Exception
+	 *             wird geworfen, wenn die Werte der Liste keine Integer Werte
+	 *             sind
+	 */
+	public int sum() throws Exception {
+		int result = 0;
+		if (!(elemente[0] instanceof Integer)) {
+			throw new Exception("list does not contain integer");
+		}
+		for (int i = 0; i < elemente.length; i++) {
+			result += (int) elemente[i];
+		}
+		return result;
 	}
 }
-
-  
