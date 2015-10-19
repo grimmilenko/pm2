@@ -14,8 +14,9 @@ public class ArrayListe<T> {
 	int anzahlElemente;
 	private Object[] elemente;
 
-	public ArrayListe() {
-		elemente = new Object[0];
+	public ArrayListe(int groesse) {
+		//elemente = new Object[0];
+		 elemente = (T[]) new Object[groesse];
 	}
 
 	/**
@@ -25,11 +26,26 @@ public class ArrayListe<T> {
 	 *            Element welches hinzugefuegt werden soll
 	 */
 	public void hinzufuegen(T t) {
-		Object[] zwischenSpeicher = new Object[elemente.length + 1];
+		/**Object[] zwischenSpeicher = new Object[elemente.length + 1];
 		System.arraycopy(elemente, 0, zwischenSpeicher, 0,
 				zwischenSpeicher.length);
-		zwischenSpeicher[zwischenSpeicher.length + 1] = t;
-		elemente = zwischenSpeicher;
+		
+		zwischenSpeicher[zwischenSpeicher.length -1] = t;
+		elemente = zwischenSpeicher;*/
+		
+		if (anzahlElemente == elemente.length) {
+			resize(elemente.length + 1);
+		}
+		elemente[elemente.length -1 ] = t;
+		anzahlElemente++;
+	}
+	
+	private void resize(int size) {
+		T[] tmp = (T[]) new Object[size];
+		for (int i = 0; i < anzahlElemente; i++) {
+			tmp[i] =(T) elemente[i];
+		}
+		elemente = tmp;
 	}
 
 	/**
