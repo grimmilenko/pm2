@@ -59,13 +59,14 @@ public class TestArrayList {
 
 	@Test
 	public void testGetSmallestElement() {
-		ArrayList<Integer> test = new ArrayList<Integer>();
-		test.add(1);
-		test.add(2);
-		test.add(3);
-		test.add(4);
-		test.add(5);
-		// assertEquals("Error!", (int) test.getSmallestElement(), 1);
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("H");
+		test.add("hallo");
+		test.add("A");
+		test.add("test");
+		test.add("oaug");
+		System.out.println(test.getSmallestElement());
+		// assertEquals("Error!", test.getSmallestElement(), 1);
 	}
 
 	@Test

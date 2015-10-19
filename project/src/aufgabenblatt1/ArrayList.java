@@ -21,7 +21,7 @@ public class ArrayList<T> {
 	public ArrayList(int size) {
 		numberOfElements = 0;
 		list = (T[]) new Object[size];
-		//list = (T[]) Array.newInstance(Object.class, size);
+		// list = (T[]) Array.newInstance(Object.class, size);
 	}
 
 	/**
@@ -102,15 +102,15 @@ public class ArrayList<T> {
 	 * 
 	 * @return Returns the smallest element
 	 */
-	// public T getSmallestElement() {
-	// T smallestElement = list[0];
-	// for (int i = 1; i < list.length; i++) {
-	// if (smallestElement.compareTo(list[i]) > 0) {
-	// smallestElement = list[i];
-	// }
-	// }
-	// return smallestElement;
-	// }
+	public <T extends Comparable<T>> T getSmallestElement() {
+		T smallestElement = (T) list[0];
+		for (int i = 1; i < list.length; i++) {
+			if (smallestElement.compareTo((T) list[i]) > 0) {
+				smallestElement = (T) list[i];
+			}
+		}
+		return smallestElement;
+	}
 
 	/**
 	 * Method to check if your index is available in your list
