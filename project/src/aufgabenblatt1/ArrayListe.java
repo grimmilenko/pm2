@@ -14,11 +14,12 @@ import java.util.Arrays;
  * 
  * @author Marco, Nico
  *
- * @param <T> Generischer Typ
+ * @param <T>
+ *            Generischer Typ
  */
 public class ArrayListe<T> {
 
-	int anzahlElemente;
+	private int anzahlElemente;
 	private Object[] elemente;
 
 	/**
@@ -38,6 +39,7 @@ public class ArrayListe<T> {
 	public ArrayListe(int groesse) {
 		// elemente = new Object[0];
 		elemente = (T[]) new Object[groesse];
+		anzahlElemente = 0;
 	}
 
 	/**
@@ -47,19 +49,11 @@ public class ArrayListe<T> {
 	 *            Element welches hinzugefuegt werden soll
 	 */
 	public void hinzufuegen(T t) {
-		/**
-		 * Object[] zwischenSpeicher = new Object[elemente.length + 1];
-		 * System.arraycopy(elemente, 0, zwischenSpeicher, 0,
-		 * zwischenSpeicher.length);
-		 * 
-		 * zwischenSpeicher[zwischenSpeicher.length -1] = t; elemente =
-		 * zwischenSpeicher;
-		 */
 
 		if (anzahlElemente == elemente.length) {
-			resize(elemente.length + 1);
+			resize(elemente.length * 2 + 1);
 		}
-		elemente[elemente.length - 1] = t;
+		elemente[anzahlElemente] = t;
 		anzahlElemente++;
 	}
 
@@ -71,6 +65,8 @@ public class ArrayListe<T> {
 	 */
 	private void resize(int size) {
 		T[] tmp = (T[]) new Object[size];
+
+		// Bisherige Elemente umkopieren
 		for (int i = 0; i < anzahlElemente; i++) {
 			tmp[i] = (T) elemente[i];
 		}
@@ -85,7 +81,7 @@ public class ArrayListe<T> {
 	 * @return Gibt das Element zurueck, welches sich an dem Index befindet
 	 */
 	public T get(int index) {
-		if (index <= elemente.length) {
+		if (index < anzahlElemente && index >= 0) {
 			return (T) elemente[index];
 		} else {
 			return null;
@@ -98,11 +94,12 @@ public class ArrayListe<T> {
 	 * @param t
 	 *            Element welches entfernt werden soll
 	 */
+	// nkb anzahlElöemente verwenden
 	public void entfernen(T t) {
-		if (elemente.length == 0) {
+		if (anzahlElemente == 0) {
 			return;
 		} else {
-			for (int i = 0; i < elemente.length; i++) {
+			for (int i = 0; i < anzahlElemente; i++) {
 				if (elemente[i].equals(t)) {
 					elemente[i] = elemente[i + 1];
 				}
@@ -117,14 +114,16 @@ public class ArrayListe<T> {
 	 *            Der Index an dem das Element gelöscht werden soll
 	 */
 	public void entferneElementAnIndex(int index) {
-		anzahlElemente--;
-		// checkIndex(index, anzahlElemente);
-		for (int i = 0; i < elemente.length; i++) {
+		
+		for (int i = 0; i < anzahlElemente; i++) {
 			if (i > index) {
 				elemente[i - 1] = elemente[i];
 			}
 		}
-		elemente = Arrays.copyOfRange(elemente, 0, anzahlElemente);
+		
+		elemente[anzahlElemente] = null;
+		anzahlElemente--;
+	
 
 	}
 
@@ -134,7 +133,7 @@ public class ArrayListe<T> {
 	 * @return die Anzahl der Elemente
 	 */
 	public int getAnzahlElemente() {
-		return elemente.length;
+		return anzahlElemente;
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class ArrayListe<T> {
 	 */
 	public String toString() {
 		String ausgabe = "";
-		for (int i = 0; i < elemente.length; i++) {
+		for (int i = 0; i < anzahlElemente; i++) {
 			ausgabe = ausgabe + elemente[i];
 		}
 		return ausgabe;
@@ -156,7 +155,8 @@ public class ArrayListe<T> {
 
 	public <T extends Comparable<T>> T getKleinstesElement() {
 		T kleinstesElement = (T) elemente[0];
-		for (int i = 1; i < elemente.length; i++) {
+		
+		for (int i = 1; i < anzahlElemente; i++) {
 			if (kleinstesElement.compareTo((T) elemente[i]) > 0) {
 				kleinstesElement = (T) elemente[i];
 			}
@@ -174,10 +174,11 @@ public class ArrayListe<T> {
 	 */
 	public int sum() throws Exception {
 		int result = 0;
+
 		if (!(elemente[0] instanceof Integer)) {
 			throw new Exception("list does not contain integer");
 		}
-		for (int i = 0; i < elemente.length; i++) {
+		for (int i = 0; i < anzahlElemente; i++) {
 			result += (int) elemente[i];
 		}
 		return result;
