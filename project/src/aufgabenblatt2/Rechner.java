@@ -7,8 +7,20 @@
 
 package aufgabenblatt2;
 
+/**
+ * Klasse zur Repraesentation eines einfachen Rechners
+ * 
+ * @author Nico Grimm
+ *
+ */
 public class Rechner {
 
+	/**
+	 * Enum zur Verwaltung der zu beherschenden Rechenarten des Rechners
+	 * 
+	 * @author Nico Grimm
+	 *
+	 */
 	public enum Operation {
 		ADDITION, SUBTRAKTION, MULTIPLIKATION, DIVISION
 	}
