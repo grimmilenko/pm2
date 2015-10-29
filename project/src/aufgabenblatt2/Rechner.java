@@ -72,15 +72,4 @@ public class Rechner {
 		}
 		return map.get(operation).apply(zahl1, zahl2);
 	}
-
-	public static void main(String[] args) {
-		Rechner test = new Rechner();
-		try{
-		System.out.println(test.berechne(Operation.DIVISION, 5, 0));}
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		System.out.println(test.map.get(Operation.ADDITION).apply(2.0, 3.0));
-	}
-
 }
