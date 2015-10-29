@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestArrayList {
+public class TestArrayListe {
 
 	@Test
 	public void testAdd() {
@@ -30,6 +30,7 @@ public class TestArrayList {
 		test.hinzufuegen(50);
 		test.entfernen(40);
 		assertEquals("Error!", (int) test.get(3), 50);
+		assertEquals("Error!", (int) test.getAnzahlElemente(), 4);
 	}
 
 	@Test

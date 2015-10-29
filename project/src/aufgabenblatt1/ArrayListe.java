@@ -14,7 +14,8 @@ import java.util.Arrays;
  * 
  * @author Marco, Nico
  *
- * @param <T> Generischer Typ
+ * @param <T>
+ *            Generischer Typ
  */
 public class ArrayListe<T> {
 
@@ -108,6 +109,7 @@ public class ArrayListe<T> {
 				}
 			}
 		}
+		elemente = Arrays.copyOfRange(elemente, 0, anzahlElemente);
 	}
 
 	/**
