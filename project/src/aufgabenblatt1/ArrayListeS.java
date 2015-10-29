@@ -28,16 +28,9 @@ public class ArrayListeS {
 	 * Prüft ob das erste Element in der Liste ein Integer Wert ist.
 	 */
 	public static boolean erstesElementZahl() {
-		// ArrayListe[] elemente;
-		// elemente = new ArrayListe[0];
-		// ArrayListe<Integer> liste = new ArrayListe<Integer>();
-		// liste.hinzufuegen(2);
-
 		System.out.println(liste.get(0));
 		if (liste.get(0) instanceof Integer) {
-			// throw new Exception("list does not contain integer")
 			return true;
-
 		}
 		return false;
 	}

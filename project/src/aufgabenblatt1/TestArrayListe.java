@@ -30,6 +30,7 @@ public class TestArrayListe {
 		test.hinzufuegen(50);
 		test.entfernen(40);
 		assertEquals("Error!", (int) test.get(3), 50);
+		assertEquals("Error!", (int) test.getAnzahlElemente(), 4);
 	}
 
 	@Test
