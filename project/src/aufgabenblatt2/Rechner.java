@@ -29,9 +29,26 @@ public class Rechner {
 	}
 
 	private Map<Operation, BinaryOperator<Double>> map = new HashMap<Operation, BinaryOperator<Double>>() {
-		// put(Operation.ADDITION, DoubleDoubleZuDouble add = (wert1, wert2) ->
-		// {
-		// return wert1 + wert2;};);
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1;
+
+		{
+			put(Operation.ADDITION, (wert1, wert2) -> {
+				return wert1 + wert2;
+			});
+			put(Operation.SUBTRAKTION, (wert1, wert2) -> {
+				return wert1 - wert2;
+			});
+			put(Operation.MULTIPLIKATION, (wert1, wert2) -> {
+				return wert1 * wert2;
+			});
+			put(Operation.DIVISION, (wert1, wert2) -> {
+
+				return wert1 / wert2;
+			});
+		}
 	};
 
 	/**
@@ -50,35 +67,20 @@ public class Rechner {
 	 */
 	public double berechne(Operation operation, double zahl1, double zahl2)
 			throws Exception {
-		switch (operation) {
-		case ADDITION:
-			DoubleDoubleZuDouble add = (wert1, wert2) -> {
-				return wert1 + wert2;
-			};
-			return add.werteAus(zahl1, zahl2);
-		case SUBTRAKTION:
-			DoubleDoubleZuDouble sub = (wert1, wert2) -> {
-				return wert1 - wert2;
-			};
-			return sub.werteAus(zahl1, zahl2);
-		case MULTIPLIKATION:
-			DoubleDoubleZuDouble mul = (wert1, wert2) -> {
-				return wert1 * wert2;
-			};
-			return mul.werteAus(zahl1, zahl2);
-		case DIVISION:
-			DoubleDoubleZuDouble div = (wert1, wert2) -> {
-				return wert1 / wert2;
-			};
-			if (zahl2 == 0) {
-				throw new Exception("Es darf nicht durch 0 geteilt werden!");
-			}
-			return div.werteAus(zahl1, zahl2);
-		default:
-			throw new Exception(
-					"Die gewuenschte Rechenoperation ist nicht Verfuegbar!");
+		if (zahl2 == 0 && operation == Operation.DIVISION) {
+			throw new Exception("Fehler! Es darf nicht durch 0 geteilt werden!");
 		}
+		return map.get(operation).apply(zahl1, zahl2);
+	}
 
+	public static void main(String[] args) {
+		Rechner test = new Rechner();
+		try{
+		System.out.println(test.berechne(Operation.DIVISION, 5, 0));}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		System.out.println(test.map.get(Operation.ADDITION).apply(2.0, 3.0));
 	}
 
 }
