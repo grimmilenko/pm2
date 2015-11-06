@@ -19,6 +19,13 @@ import java.util.stream.Collectors;
  */
 public class MyStreams {
 
+	/**
+	 * Methode zum kuerzen eines Strings auf maximal 8 Zeichen
+	 * 
+	 * @param string
+	 *            String der gekuerzt werden soll
+	 * @return gekuerzten String
+	 */
 	public String kuerzen(String string) {
 		if (string.length() <= 8) {
 			return string;
@@ -27,6 +34,14 @@ public class MyStreams {
 		}
 	}
 
+	/**
+	 * Methode, die aus einem String-Array jeden einzelnen String nimmt und
+	 * dieses bearbeitet
+	 * 
+	 * @param array
+	 *            Array welches bearbeitet werden soll
+	 * @return Gibt das bearbeitete Array als eine List zurueck
+	 */
 	public List<String> streamVerarbeitung(String[] array) {
 		return Arrays
 				.stream(array)
