@@ -25,10 +25,10 @@ public class testMyStreams {
 	@Test
 	public void test() {
 		String[] array = { "Eingabe", "Äußeres", null, "Strassen-Feger",
-				"ein Haus" };
+				"ein Haus", "Öl", "überreichen" };
 		MyStreams test = new MyStreams();
 		ArrayList<String> erwartet = new ArrayList<String>(Arrays.asList(
-				"EINGABE", "AEUSSERE", "STRASSEN", "EIN HAUS"));
+				"EINGABE", "AEUSSERE", "STRASSEN", "EIN HAUS", "OEL", "UEBERREI"));
 		assertEquals(erwartet, test.streamVerarbeitung(array));
 	}
 
