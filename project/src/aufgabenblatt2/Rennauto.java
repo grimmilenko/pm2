@@ -15,15 +15,37 @@ package aufgabenblatt2;
  */
 public class Rennauto extends Thread {
 	private static int UniqueId = 0;
-	private int id;
+	private int id = 0;
 	private final Rennstrecke rennstrecke;
-	public double gefahreneZeit;
+	private double gefahreneZeit;
 
-	// private final static double STRECKE = 10.0;
-
+	/**
+	 * Konstruktor
+	 * 
+	 * @param rennstrecke
+	 *            Referenz auf die Rennstrecke die gefahren werden soll
+	 */
 	public Rennauto(Rennstrecke rennstrecke) {
 		id = UniqueId++;
 		this.rennstrecke = rennstrecke;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt die gefahrene Zeit eines Rennauto zurueck
+	 */
+	public double getGefahreneZeit() {
+		return gefahreneZeit;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt die id eines Rennautos zureuck
+	 */
+	public int getOwnId() {
+		return id;
 	}
 
 	/**
@@ -53,7 +75,7 @@ public class Rennauto extends Thread {
 			}
 		}
 		// TODO Stimmt noch nicht
-		gefahreneZeit = (System.currentTimeMillis() + startZeit) / 1000.0;
+		gefahreneZeit = (System.currentTimeMillis() - startZeit) / 1000.0;
 	}
 
 }
