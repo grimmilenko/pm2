@@ -52,6 +52,7 @@ public class Rennauto extends Thread {
 				e.printStackTrace();
 			}
 		}
+		// TODO Stimmt noch nicht
 		gefahreneZeit = (System.currentTimeMillis() + startZeit) / 1000.0;
 	}
 

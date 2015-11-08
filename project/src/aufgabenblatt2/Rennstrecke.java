@@ -51,6 +51,7 @@ public class Rennstrecke {
 				+ "Sekunden!");
 		System.out.println("Platzierungen:");
 		for (int i = 0; i < autos.size(); i++) {
+			// TODO Zeigt noch nicht die richtige Zeit an!
 			System.out.println(autos.get(i).gefahreneZeit);
 		}
 	}
