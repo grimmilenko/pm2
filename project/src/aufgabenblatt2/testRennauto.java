@@ -20,8 +20,29 @@ import org.junit.Test;
 public class testRennauto {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testRandomRange() {
+		Rennstrecke strecke = new Rennstrecke();
+		Rennauto test = new Rennauto(strecke);
+		double rndNr;
+		double lowest = 1.0;
+		double highest = 1.0;
+		for (int i = 0; i < 1000000; i++) {
+			rndNr = test.avgSpeed(0.8, 1.2);
+			if (Double.compare(rndNr, 0.8) < 0) {
+				fail("Nummer zu klein!");
+			}
+			if (Double.compare(rndNr, 1.2) > 0) {
+				fail("Nummer zu gross!");
+			}
+			if (highest < rndNr) {
+				highest = rndNr;
+			}
+			if (lowest > rndNr) {
+				lowest = rndNr;
+			}
+		}
+		System.out.println("Kleinste Zahl: " + lowest + "\n"
+				+ "Groesste Zahl: " + highest);
 	}
 
 }

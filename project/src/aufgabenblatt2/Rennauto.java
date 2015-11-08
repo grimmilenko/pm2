@@ -16,11 +16,14 @@ package aufgabenblatt2;
 public class Rennauto extends Thread {
 	private static int UniqueId = 0;
 	private int id;
-	private double gefahreneZeit = 0.0;
-	private final static double STRECKE = 10.0;
+	private final Rennstrecke rennstrecke;
+	public double gefahreneZeit;
 
-	public Rennauto() {
+	// private final static double STRECKE = 10.0;
+
+	public Rennauto(Rennstrecke rennstrecke) {
 		id = UniqueId++;
+		this.rennstrecke = rennstrecke;
 	}
 
 	/**
@@ -32,48 +35,24 @@ public class Rennauto extends Thread {
 	 *            maximale Zufallszahl
 	 * @return Zufallszahl zwischen min und max
 	 */
-	private double randomRange(double min, double max) {
+	public double avgSpeed(double min, double max) {
 		double range = (max - min);
 		return (Math.random() * range) + min;
 	}
 
 	@Override
 	public void run() {
-		double gefahreneStrecke = 0.0;
-		for (gefahreneStrecke = 0.0; gefahreneStrecke < STRECKE + 1; gefahreneStrecke++) {
-			System.err.println("Wagen " + id + ": " + gefahreneStrecke + "/"
-					+ STRECKE);
-			gefahreneZeit = gefahreneZeit + randomRange(0.8, 1.2);
-
+		double startZeit = System.currentTimeMillis();
+		for (double i = 1.0; i <= rennstrecke.STRECKE; i++) {
+			System.err.println("Wagen " + id + ": " + i + " / "
+					+ rennstrecke.STRECKE);
+			try {
+				Thread.sleep((long) (avgSpeed(0.8, 1.2) * 1000.0));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+		gefahreneZeit = (System.currentTimeMillis() + startZeit) / 1000.0;
 	}
 
-	public static void main(String[] args) {
-		Rennauto test = new Rennauto();
-		Rennauto test1 = new Rennauto();
-		Rennauto test2 = new Rennauto();
-		Rennauto test3 = new Rennauto();
-		Rennauto test4 = new Rennauto();
-		Rennauto test5 = new Rennauto();
-		test.start();
-		test1.start();
-		test2.start();
-		test3.start();
-		test4.start();
-		test5.start();
-
-		try {
-			test.join();
-			test1.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		System.out.format("Wagen 0: %.2f\n", test.gefahreneZeit);
-		System.out.format("Wagen 1: %.2f\n", test1.gefahreneZeit);
-		System.out.format("Wagen 2: %.2f\n", test2.gefahreneZeit);
-		System.out.format("Wagen 3: %.2f\n", test3.gefahreneZeit);
-		System.out.format("Wagen 4: %.2f\n", test4.gefahreneZeit);
-		System.out.format("Wagen 5: %.2f", test5.gefahreneZeit);
-	}
 }
