@@ -9,6 +9,7 @@ package aufgabenblatt2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * Klasse zur Realisierung einer Rennstrecke
@@ -19,6 +20,7 @@ import java.util.List;
 public class Rennstrecke {
 	protected static double gefahreneStrecke = 0.0;
 	protected final double STRECKE = 10.0;
+	private  static double abbruch;
 
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
@@ -43,11 +45,43 @@ public class Rennstrecke {
 		System.out.format("Zeit des Rennens: %.2f Sekunden!\n",
 				(elapsedTime / 1000.0));
 		System.out.println("-----Platzierungen-----");
-		// TODO Liste sortieren fehlt noch!
+		
+			Collections.sort(autos, new AutoSortieren());
+				
+			
+			
+		
+		
 		for (int i = 0; i < autos.size(); i++) {
 			System.out.format("%d.: Wagen %d: %.2f Sekunden!\n", i + 1, autos
 					.get(i).getOwnId(), autos.get(i).getGefahreneZeit());
 		}
 		// TODO RENNABBRUCH NOCH IMPLEMENTIEREN!
+		
+		/**
+		 * Rennabruch
+		 * Neuer Thread über das Interface Runnable
+		 */
+		final Thread roteFlagge = new Thread( new Runnable(){
+			public void run(){
+				
+				abbruch = Math.random();
+				if( abbruch <= 0.1 && abbruch >=0.2){
+					 for(int i=0; i< autos.size(); i++){
+							 autos.get(i).interrupt();
+					 }
+				}
+				
+				try{
+					RoteFlagge.sleep(1000);
+				}
+				catch(InterruptedException e){
+					System.err.println(" Rote Flagge Wurde durch Interrupt geweckt");
+					 
+				}	
+			}
+		    }); 
+		roteFlagge.start();
+		}
 	}
-}
+
