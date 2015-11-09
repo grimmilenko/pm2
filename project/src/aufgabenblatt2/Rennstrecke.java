@@ -22,6 +22,9 @@ public class Rennstrecke {
 	protected final double STRECKE = 10.0;
 	private List<Rennauto> autos;
 
+	/**
+	 * Konstruktor
+	 */
 	public Rennstrecke() {
 		this.autos = new ArrayList<Rennauto>();
 		for (int i = 0; i < 5; i++) {
@@ -29,6 +32,11 @@ public class Rennstrecke {
 		}
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return
+	 */
 	public List<Rennauto> getAutos() {
 		return autos;
 	}

@@ -16,6 +16,12 @@ package aufgabenblatt2;
 public class RoteFlagge extends Thread {
 	private Rennstrecke strecke;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param strecke
+	 *            Referenz auf die Strecke
+	 */
 	public RoteFlagge(Rennstrecke strecke) {
 		this.strecke = strecke;
 	}
