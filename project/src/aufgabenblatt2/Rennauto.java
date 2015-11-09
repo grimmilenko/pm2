@@ -71,11 +71,10 @@ public class Rennauto extends Thread {
 			try {
 				Thread.sleep((long) (avgSpeed(0.8, 1.2) * 1000.0));
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				gefahreneZeit = (System.currentTimeMillis() - startZeit) / 1000.0;
+				return;
 			}
 		}
-		// TODO Stimmt noch nicht
 		gefahreneZeit = (System.currentTimeMillis() - startZeit) / 1000.0;
 	}
-
 }
