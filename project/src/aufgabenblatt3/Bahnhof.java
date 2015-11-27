@@ -1,13 +1,13 @@
-package aufgabenblatt03;
+package aufgabenblatt3;
 
 import java.util.Observable;
 
-public class RangierBahnhof extends Observable {
+public class Bahnhof extends Observable {
 
   public final int anzahlGleise;
   private Zug[] gleiseMitZuegen;
 
-  public Rangierbahnhof(int anzahlGleise) {
+  public Bahnhof(int anzahlGleise) {
     gleiseMitZuegen = new Zug[anzahlGleise];
     this.anzahlGleise = anzahlGleise;
   }

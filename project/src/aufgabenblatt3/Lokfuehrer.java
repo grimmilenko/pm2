@@ -1,4 +1,4 @@
-package aufgabenblatt03;
+package aufgabenblatt3;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -9,7 +9,7 @@ public class Lokfuehrer extends Thread implements Observer {
   private Zug zug;
   private int zielgleis;
 
-  public Lokfuehrer(Rangierbahnhof bahnhof) {
+  public Lokfuehrer(Bahnhof bahnhof) {
 
     zielgleis = (int) Math.random() * bahnhof.anzahlGleise;
     bahnhof.addObserver(this);
@@ -31,7 +31,7 @@ public class Lokfuehrer extends Thread implements Observer {
     return zielgleis;
   }
 
-  public void arbeite(Rangierbahnhof bahnhof) {
+  public void arbeite(Bahnhof bahnhof) {
 
     while (!isInterrupted()) {
 
