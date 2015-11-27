@@ -38,6 +38,19 @@ public class Rangierbahnhof {
 	}
 
 	/**
+	 * Methode zum ueberpruefen auf gueltigen Index
+	 * 
+	 * @param index
+	 *            Zu ueberpruefender Index
+	 * @throws IndexOutOfBoundsException
+	 */
+	private void ueberpruefeIndex(int index) throws IndexOutOfBoundsException {
+		if (index > gleisAnzahl - 1 || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+	}
+
+	/**
 	 * Synchronisierte Methode zum einfahren eines Zuges in den Rangierbahnhof
 	 * 
 	 * @param zug
@@ -46,14 +59,9 @@ public class Rangierbahnhof {
 	 *            Gleis, auf dem ein Zug einfahren soll
 	 * @throws IndexOutOfBoundsException
 	 */
-	public synchronized void einfahren(Zug zug, int gleis) throws IndexOutOfBoundsException {
-		if (gleis <= gleisAnzahl - 1 && gleis >= 0) {
-			if (this.gleis[gleis] == null) {
-				this.gleis[gleis] = zug;
-			}
-		} else {
-			throw new IndexOutOfBoundsException();
-		}
+	public synchronized void einfahren(Zug zug, int gleis) {
+		ueberpruefeIndex(gleis);
+		this.gleis[gleis] = zug;
 	}
 
 	/**
@@ -63,14 +71,9 @@ public class Rangierbahnhof {
 	 *            Gleis, auf dem ein Zug ausfahren soll
 	 * @throws IndexOutOfBoundsException
 	 */
-	public synchronized void ausfahren(int gleis) throws IndexOutOfBoundsException {
-		if (gleis <= gleisAnzahl - 1 && gleis >= 0) {
-			if (this.gleis[gleis] != null) {
-				this.gleis[gleis] = null;
-			}
-		} else {
-			throw new IndexOutOfBoundsException();
-		}
+	public synchronized void ausfahren(int gleis) {
+		ueberpruefeIndex(gleis);
+		this.gleis[gleis] = null;
 	}
 
 }
