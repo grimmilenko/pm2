@@ -7,15 +7,17 @@
 
 package aufgabenblatt3;
 
+import java.util.Observable;
+
 /**
  * Klasse zur Repräsentation eines Rangierbahnhofes
  * 
  * @author Nico
  *
  */
-public class Rangierbahnhof {
+public class Rangierbahnhof extends Observable {
 	private int gleisAnzahl = 0;
-	private Zug[] gleis;
+	private Zug[] gleise;
 
 	/**
 	 * Konstruktor mit gleichzeitiger Initialisierung des Zug-Arrays
@@ -25,7 +27,7 @@ public class Rangierbahnhof {
 	 */
 	public Rangierbahnhof(int gleisAnzahl) {
 		this.gleisAnzahl = gleisAnzahl;
-		gleis = new Zug[gleisAnzahl];
+		gleise = new Zug[gleisAnzahl];
 	}
 
 	/**
@@ -51,6 +53,34 @@ public class Rangierbahnhof {
 	}
 
 	/**
+	 * Getter
+	 * 
+	 * @return Index des ersten leeren Gleises
+	 */
+	public synchronized int getLeeresGleis() {
+		for (int i = 0; i < gleisAnzahl - 1; i++) {
+			if (gleise[i] == null) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Index des ersten besetzten Gleises
+	 */
+	public synchronized int getBesetztesGleis() {
+		for (int i = 0; i < gleisAnzahl - 1; i++) {
+			if (gleise[i] != null) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * Synchronisierte Methode zum einfahren eines Zuges in den Rangierbahnhof
 	 * 
 	 * @param zug
@@ -61,7 +91,9 @@ public class Rangierbahnhof {
 	 */
 	public synchronized void einfahren(Zug zug, int gleis) {
 		ueberpruefeIndex(gleis);
-		this.gleis[gleis] = zug;
+		if (this.gleise[gleis] == null) {
+			this.gleise[gleis] = zug;
+		}
 	}
 
 	/**
@@ -73,7 +105,9 @@ public class Rangierbahnhof {
 	 */
 	public synchronized void ausfahren(int gleis) {
 		ueberpruefeIndex(gleis);
-		this.gleis[gleis] = null;
+		if (this.gleise[gleis] != null) {
+			this.gleise[gleis] = null;
+		}
 	}
 
 }
