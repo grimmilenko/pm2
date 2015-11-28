@@ -40,6 +40,18 @@ public class Rangierbahnhof extends Observable {
 	}
 
 	/**
+	 * Getter
+	 * 
+	 * @param index
+	 *            Index des gleise Arrays
+	 * @return Gibt den Zug an der Stelle index aus dem Array gleise zurueck
+	 */
+	public Zug getZug(int index) {
+		ueberpruefeIndex(index);
+		return gleise[index];
+	}
+
+	/**
 	 * Methode zum ueberpruefen auf gueltigen Index
 	 * 
 	 * @param index
@@ -47,7 +59,7 @@ public class Rangierbahnhof extends Observable {
 	 * @throws IndexOutOfBoundsException
 	 */
 	private void ueberpruefeIndex(int index) throws IndexOutOfBoundsException {
-		if (index > gleisAnzahl - 1 || index < 0) {
+		if (index > gleisAnzahl || index < 0) {
 			throw new IndexOutOfBoundsException();
 		}
 	}
@@ -58,7 +70,7 @@ public class Rangierbahnhof extends Observable {
 	 * @return Index des ersten leeren Gleises
 	 */
 	public synchronized int getLeeresGleis() {
-		for (int i = 0; i < gleisAnzahl - 1; i++) {
+		for (int i = 0; i < gleisAnzahl; i++) {
 			if (gleise[i] == null) {
 				return i;
 			}
@@ -72,7 +84,7 @@ public class Rangierbahnhof extends Observable {
 	 * @return Index des ersten besetzten Gleises
 	 */
 	public synchronized int getBesetztesGleis() {
-		for (int i = 0; i < gleisAnzahl - 1; i++) {
+		for (int i = 0; i < gleisAnzahl; i++) {
 			if (gleise[i] != null) {
 				return i;
 			}
@@ -94,6 +106,8 @@ public class Rangierbahnhof extends Observable {
 		if (this.gleise[gleis] == null) {
 			this.gleise[gleis] = zug;
 		}
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -108,6 +122,8 @@ public class Rangierbahnhof extends Observable {
 		if (this.gleise[gleis] != null) {
 			this.gleise[gleis] = null;
 		}
+		setChanged();
+		notifyObservers();
 	}
 
 }

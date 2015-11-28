@@ -37,7 +37,7 @@ public class Simulation implements Runnable {
 			LokfuehrerNeu arbeiter = new LokfuehrerNeu(rangierbahnhof, erstelleAufgabe());
 			arbeiter.start();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
