@@ -7,6 +7,8 @@
 
 package aufgabenblatt3;
 
+import java.util.Observable;
+
 import aufgabenblatt3.LokfuehrerNeu.Aufgabe;
 
 /**
@@ -15,14 +17,14 @@ import aufgabenblatt3.LokfuehrerNeu.Aufgabe;
  * @author Nico
  *
  */
-public class Simulation implements Runnable {
+public class Simulation extends Observable  implements Runnable {
 
 	/**
 	 * Zufalls-Generator zur Erstellung einer Aufgabe fuer einen Lokfuehrer
 	 * 
 	 * @return Gibt eine Aufgabe fuer einen Lokfuehrer zurueck
 	 */
-	private Aufgabe erstelleAufgabe() {
+	public Aufgabe erstelleAufgabe() {
 		if (Math.random() < 0.5) {
 			return Aufgabe.EINFAHREN;
 		} else {
@@ -36,7 +38,13 @@ public class Simulation implements Runnable {
 		while (true) {
 			LokfuehrerNeu arbeiter = new LokfuehrerNeu(rangierbahnhof,
 					erstelleAufgabe());
+					
 			arbeiter.start();
+			
+			//rangierbahnhof.notifyObservers();
+			setChanged();
+			notifyObservers();
+			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
