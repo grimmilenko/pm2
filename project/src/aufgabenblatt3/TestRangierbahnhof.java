@@ -42,6 +42,10 @@ public class TestRangierbahnhof {
 		} catch (IndexOutOfBoundsException e) {
 			// Exception wurde geworfen -> alles ok
 		}
+		Rangierbahnhof testVoll = new Rangierbahnhof(1);
+		testVoll.einfahren(zug, 0);
+		testVoll.einfahren(new Zug(), 0);
+		assertEquals(testVoll.getZug(0), zug);
 	}
 
 	@Test
