@@ -19,6 +19,7 @@ import java.util.Observer;
 public class LokfuehrerNeu extends Thread implements Observer {
 	private Rangierbahnhof bahnhof;
 	private Aufgabe aufgabe;
+	private int aktuellesGleis = -1;
 
 	/**
 	 * Enum, welches die beiden moeglichen Aufgaben eines Lokfuehres beinhaltet
@@ -40,6 +41,15 @@ public class LokfuehrerNeu extends Thread implements Observer {
 	}
 
 	/**
+	 * Getter
+	 * 
+	 * @return Gibt das aktuelle Gleis zurueck
+	 */
+	public int getAktuellesGleis() {
+		return aktuellesGleis;
+	}
+
+	/**
 	 * Konstruktor
 	 * 
 	 * @param bahnhof
@@ -53,24 +63,30 @@ public class LokfuehrerNeu extends Thread implements Observer {
 
 	@Override
 	public void run() {
-		if (aufgabe == Aufgabe.EINFAHREN) {
-			if (bahnhof.getLeeresGleis() >= 0) {
-				Zug zug = new Zug();
-				bahnhof.einfahren(zug, bahnhof.getLeeresGleis());
-			}
+		if (getAufgabe() == Aufgabe.EINFAHREN && bahnhof.getLeeresGleis() >= 0) {
+			Zug zug = new Zug();
+			aktuellesGleis = bahnhof.getLeeresGleis();
+			bahnhof.einfahren(zug, aktuellesGleis);
+
+		} else if (getAufgabe() == Aufgabe.AUSFAHREN
+				&& bahnhof.getBesetztesGleis() >= 0) {
+			aktuellesGleis = bahnhof.getBesetztesGleis();
+			bahnhof.ausfahren(aktuellesGleis);
 		} else {
-			if (bahnhof.getBesetztesGleis() >= 0) {
-				bahnhof.ausfahren(bahnhof.getBesetztesGleis());
-			}
+			bahnhof.deleteObserver(this);
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (this.getAufgabe() == Aufgabe.EINFAHREN && bahnhof.getLeeresGleis() >= 0) {
-			System.err.format("Neuer zug auf Gleis %d eingefahren!\n", bahnhof.getLeeresGleis());
-		} else if (this.getAufgabe() == Aufgabe.AUSFAHREN && bahnhof.getBesetztesGleis() >= 0) {
-			System.err.format("Der Zug auf Gleis %d ist ausgefahren!\n", bahnhof.getBesetztesGleis());
+		if (this.getAufgabe() == Aufgabe.EINFAHREN && aktuellesGleis >= 0) {
+			System.err.format("Neuer zug auf Gleis %d eingefahren!\n",
+					aktuellesGleis);
+		} else if (this.getAufgabe() == Aufgabe.AUSFAHREN
+				&& aktuellesGleis >= 0) {
+			System.err.format("Der Zug auf Gleis %d ist ausgefahren!\n",
+					aktuellesGleis);
 		}
+		bahnhof.deleteObserver(this);
 	}
 }

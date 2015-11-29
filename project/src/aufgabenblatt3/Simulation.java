@@ -34,7 +34,8 @@ public class Simulation implements Runnable {
 	public void run() {
 		Rangierbahnhof rangierbahnhof = new Rangierbahnhof(10);
 		while (true) {
-			LokfuehrerNeu arbeiter = new LokfuehrerNeu(rangierbahnhof, erstelleAufgabe());
+			LokfuehrerNeu arbeiter = new LokfuehrerNeu(rangierbahnhof,
+					erstelleAufgabe());
 			arbeiter.start();
 			try {
 				Thread.sleep(1000);
