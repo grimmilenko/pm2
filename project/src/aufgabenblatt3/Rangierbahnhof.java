@@ -51,6 +51,11 @@ public class Rangierbahnhof extends Observable {
 		return gleise[index];
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt den Bahnhof zurueck
+	 */
 	public Rangierbahnhof getBahnhof() {
 		return this;
 	}
@@ -73,7 +78,7 @@ public class Rangierbahnhof extends Observable {
 	 * 
 	 * @return Index des ersten leeren Gleises
 	 */
-	public synchronized int getLeeresGleis() {
+	public int getLeeresGleis() {
 		for (int i = 0; i < gleisAnzahl; i++) {
 			if (gleise[i] == null) {
 				return i;
@@ -87,7 +92,7 @@ public class Rangierbahnhof extends Observable {
 	 * 
 	 * @return Index des ersten besetzten Gleises
 	 */
-	public synchronized int getBesetztesGleis() {
+	public int getBesetztesGleis() {
 		for (int i = 0; i < gleisAnzahl; i++) {
 			if (gleise[i] != null) {
 				return i;
@@ -109,9 +114,10 @@ public class Rangierbahnhof extends Observable {
 		ueberpruefeIndex(gleis);
 		if (this.gleise[gleis] == null) {
 			this.gleise[gleis] = zug;
+			setChanged();
+			notifyObservers();
 		}
-		setChanged();
-		notifyObservers();
+		
 	}
 
 	/**
@@ -125,9 +131,10 @@ public class Rangierbahnhof extends Observable {
 		ueberpruefeIndex(gleis);
 		if (this.gleise[gleis] != null) {
 			this.gleise[gleis] = null;
+			setChanged();
+			notifyObservers();
 		}
-		setChanged();
-		notifyObservers();
+		
 	}
 
 }

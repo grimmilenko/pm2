@@ -33,6 +33,11 @@ public class Simulation extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return Gitb den Rangierbahnhof zurueck
+	 */
 	public Rangierbahnhof getRangierbahnhof() {
 		return rangierbahnhof;
 	}

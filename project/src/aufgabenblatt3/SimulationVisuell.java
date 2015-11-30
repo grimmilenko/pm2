@@ -36,6 +36,11 @@ public class SimulationVisuell extends Application implements Observer {
 		new Thread(sim).start();
 	}
 
+	/**
+	 * Main
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
