@@ -25,9 +25,9 @@ public class Rangierbahnhof extends Observable {
 	 * @param gleisAnzahl
 	 *            Größe des Zug-Arrays
 	 */
-	public Rangierbahnhof(int gleisAnzahl) {
-		this.gleisAnzahl = gleisAnzahl;
-		gleise = new Zug[gleisAnzahl];
+	public Rangierbahnhof() {
+		this.gleisAnzahl = 3;
+		gleise = new Zug[3];
 	}
 
 	/**
@@ -49,6 +49,10 @@ public class Rangierbahnhof extends Observable {
 	public Zug getZug(int index) {
 		ueberpruefeIndex(index);
 		return gleise[index];
+	}
+
+	public Rangierbahnhof getBahnhof() {
+		return this;
 	}
 
 	/**

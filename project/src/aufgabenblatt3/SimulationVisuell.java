@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -28,6 +29,10 @@ import javafx.stage.Stage;
  *
  */
 public class SimulationVisuell extends Application implements Observer {
+	private Path path = new Path();
+	private GridPane gridpane = new GridPane();
+	private StackPane root = new StackPane();
+	private Stage stage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -36,29 +41,21 @@ public class SimulationVisuell extends Application implements Observer {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		GridPane gridpane = new GridPane();
-		StackPane root = new StackPane();
+		this.stage = stage;
 		root.getChildren().add(gridpane);
-		stage.setTitle("Bahnhofssimulation");
-		stage.setScene(new Scene(root, 200, 300));
+		this.stage.setTitle("Bahnhofssimulation");
+		this.stage.setScene(new Scene(root, 200, 300));
 		Simulation sim = new Simulation();
 		sim.addObserver(this);
 		new Thread(sim).start();
 
-		try {
-			Thread.sleep(3000);
-			stage.show();
-			addBahnhof(gridpane);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		// try {
+		// Thread.sleep(1000);
+		// stage.show();
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
 	}
-
-	// public Task<Boolean> aufgabe = new Task<Boolean>();
-
-	// protected Boolean call() throws Exception{
-	// int numberofSteps = 20;
-	// updateProgress(0,numberofSteps -1);
 
 	/**
 	 * Methode, die einen Bahnhof zeichnet
@@ -68,13 +65,11 @@ public class SimulationVisuell extends Application implements Observer {
 	 * 
 	 */
 	private void addBahnhof(Pane root) {
-		Path path = new Path();
+		// Path path = new Path();
 		MoveTo moveTo = new MoveTo();
 		moveTo.setX(0);
 		moveTo.setY(0);
-		LineTo lineTo = new LineTo();
-		// lineTo.setX(0);
-		// lineTo.setY(0);
+		LineTo lineTo1 = new LineTo();
 		LineTo lineTo2 = new LineTo();
 		LineTo lineTo3 = new LineTo();
 		LineTo lineTo4 = new LineTo();
@@ -89,12 +84,10 @@ public class SimulationVisuell extends Application implements Observer {
 		LineTo lineTo13 = new LineTo();
 		LineTo lineTo14 = new LineTo();
 
-		lineTo.setX(100);
-		lineTo.setY(0);
+		lineTo1.setX(100);
+		lineTo1.setY(0);
 		lineTo2.setX(100);
 		lineTo2.setY(30);
-		// moveTo.setX(10);
-		// moveTo.setY(10);
 		lineTo3.setX(30);
 		lineTo3.setY(30);
 		lineTo4.setX(30);
@@ -115,7 +108,7 @@ public class SimulationVisuell extends Application implements Observer {
 		lineTo11.setY(110);
 
 		path.getElements().add(moveTo);
-		path.getElements().add(lineTo);
+		path.getElements().add(lineTo1);
 		path.getElements().add(lineTo2);
 		path.getElements().add(lineTo3);
 		path.getElements().add(lineTo4);
@@ -133,11 +126,61 @@ public class SimulationVisuell extends Application implements Observer {
 		path.setTranslateY(30);
 		path.setStrokeWidth(3);
 		path.setStroke(Color.BLACK);
-		root.getChildren().add(path);
+		gridpane.getChildren().add(path);
+	}
+
+	private void zeichneZug(Pane root, int x, int y) {
+		MoveTo moveTo = new MoveTo();
+		moveTo.setX(x);
+		moveTo.setY(y);
+
+		LineTo lineTo1 = new LineTo();
+		LineTo lineTo2 = new LineTo();
+		LineTo lineTo3 = new LineTo();
+		LineTo lineTo4 = new LineTo();
+
+		lineTo1.setX(x + 65);
+		lineTo1.setY(y);
+		lineTo2.setX(x + 65);
+		lineTo2.setY(y + 20);
+		lineTo3.setX(x);
+		lineTo3.setY(y + 20);
+		lineTo4.setX(x);
+		lineTo4.setY(y);
+
+		path.getElements().add(moveTo);
+		path.getElements().add(lineTo1);
+		path.getElements().add(lineTo2);
+		path.getElements().add(lineTo3);
+		path.getElements().add(lineTo4);
+
+		path.setTranslateY(30);
+		path.setStrokeWidth(3);
+		path.setStroke(Color.BLACK);
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		// addBahnhof(Pane root);
+	public void update(Observable o, Object arg1) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				gridpane.getChildren().clear();
+				addBahnhof(gridpane);
+				if (o instanceof Simulation) {
+					Simulation bahnhof = (Simulation) o;
+					if (bahnhof.getRangierbahnhof().getZug(0) != null) {
+						zeichneZug(gridpane, 35, 5);
+					}
+					if (bahnhof.getRangierbahnhof().getZug(1) != null) {
+						zeichneZug(gridpane, 35, 45);
+					}
+					if (bahnhof.getRangierbahnhof().getZug(2) != null) {
+						zeichneZug(gridpane, 35, 85);
+					}
+				}
+				stage.show();
+			}
+		});
 	}
 }

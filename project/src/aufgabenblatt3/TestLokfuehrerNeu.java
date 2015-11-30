@@ -17,7 +17,7 @@ public class TestLokfuehrerNeu {
 
 	@Test
 	public void testRun() {
-		Rangierbahnhof rangierbahnhof = new Rangierbahnhof(5);
+		Rangierbahnhof rangierbahnhof = new Rangierbahnhof();
 		LokfuehrerNeu testEin = new LokfuehrerNeu(rangierbahnhof,
 				Aufgabe.EINFAHREN);
 		LokfuehrerNeu testAus = new LokfuehrerNeu(rangierbahnhof,

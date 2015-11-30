@@ -17,7 +17,8 @@ import aufgabenblatt3.LokfuehrerNeu.Aufgabe;
  * @author Nico
  *
  */
-public class Simulation extends Observable  implements Runnable {
+public class Simulation extends Observable implements Runnable {
+	protected Rangierbahnhof rangierbahnhof;
 
 	/**
 	 * Zufalls-Generator zur Erstellung einer Aufgabe fuer einen Lokfuehrer
@@ -32,19 +33,22 @@ public class Simulation extends Observable  implements Runnable {
 		}
 	}
 
+	public Rangierbahnhof getRangierbahnhof() {
+		return rangierbahnhof;
+	}
+
 	@Override
 	public void run() {
-		Rangierbahnhof rangierbahnhof = new Rangierbahnhof(10);
+		rangierbahnhof = new Rangierbahnhof();
 		while (true) {
 			LokfuehrerNeu arbeiter = new LokfuehrerNeu(rangierbahnhof,
 					erstelleAufgabe());
-					
+
 			arbeiter.start();
-			
-			//rangierbahnhof.notifyObservers();
+
 			setChanged();
 			notifyObservers();
-			
+
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

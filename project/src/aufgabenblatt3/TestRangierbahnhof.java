@@ -21,11 +21,11 @@ public class TestRangierbahnhof {
 
 	@Test
 	public void testEinfahren() {
-		Rangierbahnhof test = new Rangierbahnhof(10);
-		Rangierbahnhof test1 = new Rangierbahnhof(10);
-		Rangierbahnhof test2 = new Rangierbahnhof(10);
-		Rangierbahnhof test3 = new Rangierbahnhof(10);
-		Rangierbahnhof test4 = new Rangierbahnhof(10);
+		Rangierbahnhof test = new Rangierbahnhof();
+		Rangierbahnhof test1 = new Rangierbahnhof();
+		Rangierbahnhof test2 = new Rangierbahnhof();
+		Rangierbahnhof test3 = new Rangierbahnhof();
+		Rangierbahnhof test4 = new Rangierbahnhof();
 
 		Zug zug = new Zug();
 		test.einfahren(zug, 0);
@@ -42,7 +42,7 @@ public class TestRangierbahnhof {
 		} catch (IndexOutOfBoundsException e) {
 			// Exception wurde geworfen -> alles ok
 		}
-		Rangierbahnhof testVoll = new Rangierbahnhof(1);
+		Rangierbahnhof testVoll = new Rangierbahnhof();
 		testVoll.einfahren(zug, 0);
 		testVoll.einfahren(new Zug(), 0);
 		assertEquals(testVoll.getZug(0), zug);
@@ -50,11 +50,10 @@ public class TestRangierbahnhof {
 
 	@Test
 	public void testAusfahren() {
-		Rangierbahnhof test = new Rangierbahnhof(10);
+		Rangierbahnhof test = new Rangierbahnhof();
 
 		test.einfahren(new Zug(), 1);
 		test.ausfahren(1);
-		test.ausfahren(6);
 
 		assertEquals(null, test.getZug(1));
 		try {
@@ -68,31 +67,23 @@ public class TestRangierbahnhof {
 
 	@Test
 	public void testGetLeeresGleis() {
-		Rangierbahnhof test = new Rangierbahnhof(10);
+		Rangierbahnhof test = new Rangierbahnhof();
 
 		test.einfahren(new Zug(), 0);
 		assertEquals(test.getLeeresGleis(), 1);
 		test.einfahren(new Zug(), 1);
+		assertEquals(test.getLeeresGleis(), 2);
 		test.einfahren(new Zug(), 2);
-		test.einfahren(new Zug(), 4);
-		test.einfahren(new Zug(), 5);
-		assertEquals(test.getLeeresGleis(), 3);
-		test.einfahren(new Zug(), 3);
-		test.einfahren(new Zug(), 6);
-		test.einfahren(new Zug(), 7);
-		test.einfahren(new Zug(), 8);
-		assertEquals(test.getLeeresGleis(), 9);
-		test.einfahren(new Zug(), 9);
 		assertEquals(test.getLeeresGleis(), -1);
 	}
 
 	@Test
 	public void testGetBesetztesGleis() {
-		Rangierbahnhof test = new Rangierbahnhof(10);
+		Rangierbahnhof test = new Rangierbahnhof();
 
 		assertEquals(test.getBesetztesGleis(), -1);
-		test.einfahren(new Zug(), 5);
-		assertEquals(test.getBesetztesGleis(), 5);
+		test.einfahren(new Zug(), 2);
+		assertEquals(test.getBesetztesGleis(), 2);
 	}
 
 }
