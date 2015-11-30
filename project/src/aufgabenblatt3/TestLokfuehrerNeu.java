@@ -32,9 +32,4 @@ public class TestLokfuehrerNeu {
 		testEin.run();
 		assertEquals(testEin.getAktuellesGleis(), 0);
 	}
-
-	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
-	}
 }
