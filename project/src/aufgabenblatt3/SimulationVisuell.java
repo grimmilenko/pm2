@@ -13,7 +13,6 @@ import java.util.Observer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -29,10 +28,13 @@ import javafx.stage.Stage;
  *
  */
 public class SimulationVisuell extends Application implements Observer {
-	private Path path = new Path();
-	private GridPane gridpane = new GridPane();
-	private StackPane root = new StackPane();
-	private Stage stage;
+	private Pane gridpaneNeu = new Pane();
+
+	public SimulationVisuell() {
+		Simulation sim = new Simulation();
+		sim.addObserver(this);
+		new Thread(sim).start();
+	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -40,21 +42,11 @@ public class SimulationVisuell extends Application implements Observer {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-
-		this.stage = stage;
-		root.getChildren().add(gridpane);
-		this.stage.setTitle("Bahnhofssimulation");
-		this.stage.setScene(new Scene(root, 200, 300));
-		Simulation sim = new Simulation();
-		sim.addObserver(this);
-		new Thread(sim).start();
-
-		// try {
-		// Thread.sleep(1000);
-		// stage.show();
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
+		StackPane root = new StackPane();
+		root.getChildren().add(gridpaneNeu);
+		stage.setTitle("Bahnhofssimulation");
+		stage.setScene(new Scene(root, 200, 300));
+		stage.show();
 	}
 
 	/**
@@ -65,7 +57,7 @@ public class SimulationVisuell extends Application implements Observer {
 	 * 
 	 */
 	private void addBahnhof(Pane root) {
-		// Path path = new Path();
+		Path path = new Path();
 		MoveTo moveTo = new MoveTo();
 		moveTo.setX(0);
 		moveTo.setY(0);
@@ -126,10 +118,21 @@ public class SimulationVisuell extends Application implements Observer {
 		path.setTranslateY(30);
 		path.setStrokeWidth(3);
 		path.setStroke(Color.BLACK);
-		gridpane.getChildren().add(path);
+		gridpaneNeu.getChildren().add(path);
 	}
 
-	private void zeichneZug(Pane root, int x, int y) {
+	/**
+	 * Methode zum zeichnen eines Zuges
+	 * 
+	 * @param root
+	 *            Das Fenster in dem gezeichnet wird
+	 * @param x
+	 *            Start-X-Koordinate
+	 * @param y
+	 *            Start-Y-Koordinate
+	 */
+	private void zeichneZug(Pane gridpane, int x, int y) {
+		Path path = new Path();
 		MoveTo moveTo = new MoveTo();
 		moveTo.setX(x);
 		moveTo.setY(y);
@@ -157,6 +160,8 @@ public class SimulationVisuell extends Application implements Observer {
 		path.setTranslateY(30);
 		path.setStrokeWidth(3);
 		path.setStroke(Color.BLACK);
+
+		gridpane.getChildren().add(path);
 	}
 
 	@Override
@@ -165,21 +170,20 @@ public class SimulationVisuell extends Application implements Observer {
 
 			@Override
 			public void run() {
-				gridpane.getChildren().clear();
-				addBahnhof(gridpane);
+				gridpaneNeu.getChildren().clear();
+				addBahnhof(gridpaneNeu);
 				if (o instanceof Simulation) {
 					Simulation bahnhof = (Simulation) o;
-					if (bahnhof.getRangierbahnhof().getZug(0) != null) {
-						zeichneZug(gridpane, 35, 5);
+					if (bahnhof.getRangierbahnhof().getZug(0) instanceof Zug) {
+						zeichneZug(gridpaneNeu, 35, 5);
 					}
-					if (bahnhof.getRangierbahnhof().getZug(1) != null) {
-						zeichneZug(gridpane, 35, 45);
+					if (bahnhof.getRangierbahnhof().getZug(1) instanceof Zug) {
+						zeichneZug(gridpaneNeu, 35, 45);
 					}
-					if (bahnhof.getRangierbahnhof().getZug(2) != null) {
-						zeichneZug(gridpane, 35, 85);
+					if (bahnhof.getRangierbahnhof().getZug(2) instanceof Zug) {
+						zeichneZug(gridpaneNeu, 35, 85);
 					}
 				}
-				stage.show();
 			}
 		});
 	}

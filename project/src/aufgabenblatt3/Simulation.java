@@ -50,7 +50,7 @@ public class Simulation extends Observable implements Runnable {
 			notifyObservers();
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
