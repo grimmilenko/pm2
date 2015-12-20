@@ -9,6 +9,8 @@ package aufgabenblatt4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Klasse zum Modellieren eines Polygons
@@ -16,7 +18,7 @@ import java.util.List;
  * @author grimmilenko
  *
  */
-public class PolygonModell {
+public class PolygonModell extends Observable implements Observer {
 	/**
 	 * Liste der Polygone
 	 */
@@ -30,6 +32,8 @@ public class PolygonModell {
 	public void bearbeitungZuEnde() {
 		polygone.add(aktuellesPolygon);
 		aktuellesPolygon = new Polygon();
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -65,6 +69,12 @@ public class PolygonModell {
 	 */
 	public List<Polygon> getList() {
 		return polygone;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers();
 	}
 
 }

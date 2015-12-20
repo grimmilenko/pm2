@@ -9,6 +9,7 @@ package aufgabenblatt4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Klasse zum verwalten einer Liste mit Punkten fuer ein entsprechendes Polygon
@@ -16,7 +17,7 @@ import java.util.List;
  * @author grimmilenko
  *
  */
-public class Polygon {
+public class Polygon extends Observable {
 	/**
 	 * Innere Klasse zur Bestimmung der x- und y- Koordinate eines Punktes des
 	 * Polygons
@@ -66,6 +67,8 @@ public class Polygon {
 	 */
 	public void setPunkt(double x, double y) {
 		punkte.add(new Punkt(x, y));
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
