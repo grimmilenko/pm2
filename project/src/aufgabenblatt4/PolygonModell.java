@@ -7,6 +7,64 @@
 
 package aufgabenblatt4;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Klasse zum Modellieren eines Polygons
+ * 
+ * @author grimmilenko
+ *
+ */
 public class PolygonModell {
+	/**
+	 * Liste der Polygone
+	 */
+	private List<Polygon> polygone = new ArrayList<Polygon>();
+
+	private Polygon aktuellesPolygon;
+
+	/**
+	 * Methode zum abschliessen der Bearbeitung eines Polygons
+	 */
+	public void bearbeitungZuEnde() {
+		polygone.add(aktuellesPolygon);
+		aktuellesPolygon = new Polygon();
+	}
+
+	/**
+	 * Default-Kostruktor
+	 */
+	public PolygonModell() {
+		aktuellesPolygon = new Polygon();
+	}
+
+	/**
+	 * Kostruktor
+	 * 
+	 * @param polygon
+	 *            Referenz auf das zu bearbeitende Polygon
+	 */
+	public PolygonModell(Polygon polygon) {
+		aktuellesPolygon = polygon;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt das aktuelle zu bearbeitende Polygon zurueck
+	 */
+	public Polygon getPolygon() {
+		return aktuellesPolygon;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt die Liste der Polygone zurueck
+	 */
+	public List<Polygon> getList() {
+		return polygone;
+	}
 
 }
