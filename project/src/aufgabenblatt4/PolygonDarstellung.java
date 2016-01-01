@@ -10,8 +10,9 @@ package aufgabenblatt4;
 import java.util.Observable;
 import java.util.Observer;
 
-import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
 
 /**
  * Klasse zur Darstellung der Polygone
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
  */
 public class PolygonDarstellung extends Pane implements Observer {
 	private PolygonModell modell;
+	private Pane pane = new Pane();
 
 	/**
 	 * Konstruktor
@@ -30,17 +32,41 @@ public class PolygonDarstellung extends Pane implements Observer {
 	 */
 	public PolygonDarstellung(PolygonModell modell) {
 		this.modell = modell;
+		this.modell.addObserver(this);
+	}
+
+	private Ellipse zeichnePunkt(Double centerX, Double centerY) {
+		Ellipse punkt = new Ellipse(2, 2);
+		punkt.setCenterX(centerX);
+		punkt.setCenterY(centerY);
+
+		return punkt;
+
+	}
+
+	private void zeichne() {
+
+		for (int i = 0; i < modell.getListePolygone().size() - 1; i++) {
+			for (int j = 0; j < modell.getListePolygone().get(i).getListePunkte().size(); j++) {
+				pane.getChildren().add(zeichnePunkt(modell.getListePolygone().get(i).getXAtIndex(j),
+						modell.getListePolygone().get(i).getYAtIndex(j)));
+			}
+		}
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt die gezeichnete Pane zurueck
+	 */
+	public Pane getPane() {
+		// TODO alles muss zusammengefuegt werden
+		zeichne();
+		return pane;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		// TODO was passiert beim update?
 	}
 }

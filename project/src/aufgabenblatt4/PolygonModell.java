@@ -23,7 +23,6 @@ public class PolygonModell extends Observable implements Observer {
 	 * Liste der Polygone
 	 */
 	private List<Polygon> polygone = new ArrayList<Polygon>();
-
 	private Polygon aktuellesPolygon;
 
 	/**
@@ -32,6 +31,7 @@ public class PolygonModell extends Observable implements Observer {
 	public void bearbeitungZuEnde() {
 		polygone.add(aktuellesPolygon);
 		aktuellesPolygon = new Polygon();
+		aktuellesPolygon.addObserver(this);
 		setChanged();
 		notifyObservers();
 	}
@@ -67,13 +67,12 @@ public class PolygonModell extends Observable implements Observer {
 	 * 
 	 * @return Gibt die Liste der Polygone zurueck
 	 */
-	public List<Polygon> getList() {
+	public List<Polygon> getListePolygone() {
 		return polygone;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		setChanged();
 		notifyObservers();
 	}
 

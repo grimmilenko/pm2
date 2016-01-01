@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  *
  */
 public class Gui extends Application {
+
 	/**
 	 * Programmstartpunkt
 	 */
@@ -38,23 +39,21 @@ public class Gui extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Polygon-Zeicheneditor");
 		AnchorPane anchorPane = new AnchorPane();
-
-		// PolygonDarstellung linke Ankerseite!
-		// TODO Klasse erstellen und implementieren
+		PolygonDarstellung polygonDarstellung = new PolygonDarstellung(new PolygonModell());
 
 		// Bedienungsinterface rechte Ankerseite!
 		VBox bedienung = new VBox(5);
 		Button zeichneButton = new Button("Zeichne / Neues Polygon");
-		zeichneButton.setOnAction((ereigis) -> {
+		zeichneButton.setOnAction(event -> {
 			System.out.println("Polygon gezeichnet und neues erstellt");
 		});
 		bedienung.getChildren().add(zeichneButton);
 
 		// Tabelle
-		TableView tabelle = new TableView();
+		TableView<String> tabelle = new TableView<String>();
 		tabelle.setPrefHeight(150);
 		tabelle.setPrefWidth(250);
-		TableColumn tabellenSpalte = new TableColumn("Polygon");
+		TableColumn<String, Polygon> tabellenSpalte = new TableColumn<String, Polygon>("Polygon");
 		tabelle.getColumns().add(tabellenSpalte);
 		bedienung.getChildren().add(tabelle);
 
@@ -93,10 +92,12 @@ public class Gui extends Application {
 		// AnchorPane zusammensetzen
 		AnchorPane.setRightAnchor(bedienung, 10.0);
 		AnchorPane.setTopAnchor(bedienung, 10.0);
+		AnchorPane.setBottomAnchor(bedienung, 10.0);
 		anchorPane.getChildren().add(bedienung);
+		anchorPane.getChildren().add(polygonDarstellung.getPane());
 
 		// Stage anzeigen
-		primaryStage.setScene(new Scene(anchorPane, 500, 300));
+		primaryStage.setScene(new Scene(anchorPane, 500, 255));
 		primaryStage.show();
 	}
 

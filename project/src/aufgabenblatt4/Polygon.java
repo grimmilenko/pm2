@@ -53,7 +53,7 @@ public class Polygon extends Observable {
 	 * 
 	 * @return Gibt die Liste der Punkte zurueck
 	 */
-	public List<Punkt> getList() {
+	public List<Punkt> getListePunkte() {
 		return punkte;
 	}
 
