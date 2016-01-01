@@ -27,8 +27,8 @@ public class TestPolygonModell {
 		Polygon akt = test.getPolygon();
 
 		test.bearbeitungZuEnde();
-		assertFalse(test.getList().isEmpty());
-		assertEquals(akt, test.getList().get(0));
+		assertFalse(test.getListePolygone().isEmpty());
+		assertEquals(akt, test.getListePolygone().get(0));
 
 		Polygon neu = test.getPolygon();
 		assertNotEquals(akt, neu);
