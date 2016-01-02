@@ -44,6 +44,7 @@ public class PolygonDarstellung extends Canvas implements Observer {
 
 			@Override
 			public void invalidated(javafx.beans.Observable observable) {
+				setWindow();
 				if (modell != null) {
 					zeichnePolygon(modell.getPolygon());
 				}
@@ -68,6 +69,11 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	public synchronized void clearScreen() {
 		gc.clearRect(0, 0, getWidth(), getHeight());
 		gc.fillRect(0, 0, getWidth(), getHeight());
+	}
+
+	public void setWindow() {
+		setWidth(root.getLayoutBounds().getWidth());
+		setHeight(root.getLayoutBounds().getHeight());
 	}
 
 	public synchronized void zeichnePolygon(Polygon poly) {

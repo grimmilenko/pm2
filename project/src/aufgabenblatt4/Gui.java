@@ -31,6 +31,8 @@ public class Gui extends Application {
 	private Pane pane;
 	private TableView<Polygon> tabelle;
 	private PolygonTabelle polyTabelle;
+	private TextArea area;
+	private PolygonSkripting regAusdruck = new PolygonSkripting();
 
 	/**
 	 * Breite und Hoehe der Anwendung
@@ -64,7 +66,6 @@ public class Gui extends Application {
 		PolygonModell modell = new PolygonModell(polygonDarstellung);
 		polygonDarstellung.setModell(modell);
 		polyTabelle = new PolygonTabelle(this.tabelle, modell);
-		modell.bearbeitungZuEnde();
 		polyTabelle.initTabelle();
 	}
 
@@ -97,7 +98,7 @@ public class Gui extends Application {
 	 */
 	private Pane befehlInput() {
 		BorderPane pane = new BorderPane();
-		TextArea area = new TextArea();
+		area = new TextArea();
 		area.setMaxHeight(50);
 		pane.setCenter(area);
 		pane.setBottom(befehlButtons());
@@ -113,8 +114,21 @@ public class Gui extends Application {
 		HBox pane = new HBox();
 		pane.setSpacing(5);
 		Button hilfe = new Button("?");
-		hilfe.setTooltip(new Tooltip("tooltip"));
+		hilfe.setTooltip(new Tooltip(
+				"Um Punkte zu einem Polygon hinzuzufügen, können Sie entweder mit der Maus in die Zeichenfläche\n"
+						+ "auf die gewünschte Koordinate klicken oder mit Hilfe des Textfensters Befehle eingeben.\n"
+						+ "Befehle haben folgende Struktur:\n" + "bewege -> Koordinate 1, Koordinate 2\n"
+						+ "Bsp.: bewege -> 50,50"));
 		Button befehl = new Button("Fuehre aus!");
+		befehl.setOnAction(event -> {
+			String text = area.getText();
+			try {
+				polygonDarstellung.getModell().getPolygon().setPunkt(regAusdruck.getX(text), regAusdruck.getY(text));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			area.clear();
+		});
 		Button fertig = new Button("Fertig");
 		fertig.setOnAction(event -> {
 			polygonDarstellung.getModell().bearbeitungZuEnde();
