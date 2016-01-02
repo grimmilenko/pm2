@@ -118,7 +118,7 @@ public class Gui extends Application {
 				"Um Punkte zu einem Polygon hinzuzufügen, können Sie entweder mit der Maus in die Zeichenfläche\n"
 						+ "auf die gewünschte Koordinate klicken oder mit Hilfe des Textfensters Befehle eingeben.\n"
 						+ "Befehle haben folgende Struktur:\n" + "bewege -> Koordinate 1, Koordinate 2\n"
-						+ "Bsp.: bewege -> 50,50"));
+						+ "Bsp.: bewege -> 52.01,1.456"));
 		Button befehl = new Button("Fuehre aus!");
 		befehl.setOnAction(event -> {
 			String text = area.getText();
