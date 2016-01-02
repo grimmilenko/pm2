@@ -8,7 +8,7 @@ public class PolygonSkripting {
 	private Matcher matcher;
 
 	public PolygonSkripting() {
-		pattern = Pattern.compile("(bewege)\\s->" + "\\s(0|-?[1-9]+[0-9]*),(0|-?[1-9]+[0-9]*)");
+		pattern = Pattern.compile("(bewege)\\s->" + "\\s(0|-?[0-9]*\\.?[0-9]*),(0|-?[0-9]*\\.?[0-9]*)");
 		matcher = null;
 	}
 
