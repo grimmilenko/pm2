@@ -127,6 +127,11 @@ public class Polygon extends Observable {
 		return info;
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt die Info des Polygons zurueck
+	 */
 	public String getInfo() {
 		return info;
 	}

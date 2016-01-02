@@ -30,6 +30,13 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	private InvalidationListener listener;
 	private PolygonModell modell;
 
+	/**
+	 * Kostruktor
+	 * 
+	 * @param pane
+	 *            Die StackPane auf der die PolygonDarstellung gezeichnet werden
+	 *            soll
+	 */
 	public PolygonDarstellung(StackPane pane) {
 		super(350, 350);
 
@@ -66,21 +73,39 @@ public class PolygonDarstellung extends Canvas implements Observer {
 		});
 	}
 
+	/**
+	 * Methode zum clearen des Zeichenfensters
+	 */
 	public synchronized void clearScreen() {
 		gc.clearRect(0, 0, getWidth(), getHeight());
 		gc.fillRect(0, 0, getWidth(), getHeight());
 	}
 
+	/**
+	 * Methode zum anpassen der Groesse des Zeichenfensters
+	 */
 	public void setWindow() {
 		setWidth(root.getLayoutBounds().getWidth());
 		setHeight(root.getLayoutBounds().getHeight());
 	}
 
+	/**
+	 * Methode zum zeichnen eines Polygons
+	 * 
+	 * @param poly
+	 *            Das zu zeichnende Polygon
+	 */
 	public synchronized void zeichnePolygon(Polygon poly) {
 		clearScreen();
 		polygonZeichnung(poly);
 	}
 
+	/**
+	 * Methode zum erstellen der Zeichnung eines Polygons
+	 * 
+	 * @param poly
+	 *            Das zu zeichnende Polygon
+	 */
 	private synchronized void polygonZeichnung(Polygon poly) {
 		if (poly != null) {
 			for (int i = 0; i < poly.getListePunkte().size(); i++) {
@@ -101,18 +126,21 @@ public class PolygonDarstellung extends Canvas implements Observer {
 		}
 	}
 
-	public synchronized void setBackgroundColor(double red, double green, double blue) {
-		gc.setFill(Color.color(red, green, blue));
-	}
-
-	public synchronized void setStrokeColor(double red, double green, double blue) {
-		gc.setStroke(Color.color(red, green, blue));
-	}
-
+	/**
+	 * Methode zum setten des Referenz-Modells
+	 * 
+	 * @param modell
+	 *            Das Referenz-Modell
+	 */
 	public synchronized void setModell(PolygonModell modell) {
 		this.modell = modell;
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return Gibt das Modell zurueck
+	 */
 	public PolygonModell getModell() {
 		return modell;
 	}

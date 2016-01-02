@@ -1,3 +1,10 @@
+/**
+ * Praktikum PM2, WS 15/16
+ * Nico Grimm (nico.grimm@haw-hamburg.de)
+ * Marco Colbow (marco.colbow@haw-hamburg.de)
+ * Aufgabe 4
+ */
+
 package aufgabenblatt4;
 
 import java.util.ArrayList;
@@ -9,6 +16,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Klasse die die Tabelle mit den vorhandenen Polygonen darstellt
+ * 
+ * @author grimmilenko
+ *
+ */
 public class PolygonTabelle {
 	private TableView<Polygon> tabelle;
 	private PolygonModell modell;
@@ -18,6 +31,9 @@ public class PolygonTabelle {
 		this.modell = modell;
 	}
 
+	/**
+	 * Methode zum initialisieren der Tabelle
+	 */
 	public void initTabelle() {
 		tabelle.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		List<Polygon> polygone = new ArrayList<Polygon>(modell.getListePolygone());
@@ -28,6 +44,9 @@ public class PolygonTabelle {
 		tabelle.getColumns().add(polys);
 	}
 
+	/**
+	 * Methode zu updaten der Tabelle
+	 */
 	public void refreshTabelle() {
 		tabelle.getItems().clear();
 		List<Polygon> polygone = new ArrayList<Polygon>(modell.getListePolygone());
