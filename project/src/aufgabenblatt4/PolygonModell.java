@@ -29,18 +29,20 @@ public class PolygonModell extends Observable implements Observer {
 	 * Methode zum abschliessen der Bearbeitung eines Polygons
 	 */
 	public void bearbeitungZuEnde() {
+		aktuellesPolygon.toString();
 		polygone.add(aktuellesPolygon);
-		aktuellesPolygon = new Polygon();
+		aktuellesPolygon = new Polygon(this);
 		aktuellesPolygon.addObserver(this);
 		setChanged();
 		notifyObservers();
 	}
 
 	/**
-	 * Default-Kostruktor
+	 * Kostruktor
 	 */
-	public PolygonModell() {
-		aktuellesPolygon = new Polygon();
+	public PolygonModell(Observer o) {
+		aktuellesPolygon = new Polygon(this);
+		addObserver(o);
 	}
 
 	/**
@@ -72,7 +74,13 @@ public class PolygonModell extends Observable implements Observer {
 	}
 
 	@Override
+	public String toString() {
+		return "Anzahl der Polygone in der Liste: " + polygone.size() + ", aktuelles " + aktuellesPolygon.toString();
+	}
+
+	@Override
 	public void update(Observable o, Object arg) {
+		setChanged();
 		notifyObservers();
 	}
 

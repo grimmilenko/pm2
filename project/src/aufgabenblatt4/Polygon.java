@@ -10,6 +10,7 @@ package aufgabenblatt4;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Klasse zum verwalten einer Liste mit Punkten fuer ein entsprechendes Polygon
@@ -44,9 +45,22 @@ public class Polygon extends Observable {
 	}
 
 	/**
+	 * Konstruktor
+	 * 
+	 * @param o
+	 *            Einen Observer
+	 */
+	public Polygon(Observer o) {
+		punkte = new ArrayList<Punkt>();
+		addObserver(o);
+	}
+
+	/**
 	 * Liste der Punkte
 	 */
-	private List<Punkt> punkte = new ArrayList<Punkt>();
+	private List<Punkt> punkte;
+
+	private String info;
 
 	/**
 	 * Getter
@@ -99,6 +113,22 @@ public class Polygon extends Observable {
 		} else {
 			throw new IndexOutOfBoundsException("Der gesuchte Index ist nicht in der Liste");
 		}
+	}
+
+	@Override
+	public String toString() {
+		String punkteAnz = Integer.toString(punkte.size());
+		if (punkte.size() > 1 || punkte.size() == 0) {
+			punkteAnz += " Punkten";
+		} else {
+			punkteAnz += " Punkt";
+		}
+		info = "Polygon mit " + punkteAnz;
+		return info;
+	}
+
+	public String getInfo() {
+		return info;
 	}
 
 }

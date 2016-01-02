@@ -9,6 +9,8 @@ package aufgabenblatt4;
 
 import static org.junit.Assert.*;
 
+import java.util.Observer;
+
 import org.junit.Test;
 
 /**
@@ -21,7 +23,7 @@ public class TestPolygon {
 
 	@Test
 	public void testGetXAtIndex() {
-		Polygon test = new Polygon();
+		Polygon test = new Polygon((Observer) this);
 		test.setPunkt(1, 2); // index 0
 		test.setPunkt(-25, 1.264); // index 1
 		test.setPunkt(0.2, -2.745); // index 2
@@ -50,7 +52,7 @@ public class TestPolygon {
 
 	@Test
 	public void testGetYAtIndex() {
-		Polygon test = new Polygon();
+		Polygon test = new Polygon((Observer) this);
 		test.setPunkt(1, 2); // index 0
 		test.setPunkt(-25, 1.264); // index 1
 		test.setPunkt(0.2, -2.745); // index 2

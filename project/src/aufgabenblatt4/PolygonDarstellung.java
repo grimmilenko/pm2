@@ -9,8 +9,14 @@ package aufgabenblatt4;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import javafx.beans.InvalidationListener;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 /**
  * Klasse zur Darstellung der Polygone
@@ -20,13 +26,93 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class PolygonDarstellung extends Canvas implements Observer {
 	private GraphicsContext gc;
+	private StackPane root;
+	private InvalidationListener listener;
+	private PolygonModell modell;
 
-	public PolygonDarstellung() {
+	public PolygonDarstellung(StackPane pane) {
 		super(350, 350);
+
+		gc = getGraphicsContext2D();
+
+		gc.setFill(Color.AQUAMARINE);
+		gc.setStroke(Color.BLACK);
+
+		pane.getChildren().add(this);
+		root = pane;
+		listener = new InvalidationListener() {
+
+			@Override
+			public void invalidated(javafx.beans.Observable observable) {
+				if (modell != null) {
+					zeichnePolygon(modell.getPolygon());
+				}
+
+			}
+		};
+
+		root.widthProperty().addListener(listener);
+		root.heightProperty().addListener(listener);
+
+		addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				Polygon aktuellesPolygon = modell.getPolygon();
+				aktuellesPolygon.setPunkt(event.getX(), event.getY());
+				event.consume();
+			}
+		});
+	}
+
+	public synchronized void clearScreen() {
+		gc.clearRect(0, 0, getWidth(), getHeight());
+		gc.fillRect(0, 0, getWidth(), getHeight());
+	}
+
+	public synchronized void zeichnePolygon(Polygon poly) {
+		clearScreen();
+		polygonZeichnung(poly);
+	}
+
+	private synchronized void polygonZeichnung(Polygon poly) {
+		if (poly != null) {
+			for (int i = 0; i < poly.getListePunkte().size(); i++) {
+				double x1 = poly.getXAtIndex(i);
+				double y1 = poly.getYAtIndex(i);
+				double x2;
+				double y2;
+				gc.strokeOval(x1 - 2.5, y1 - 2.5, 5, 5);
+				if (i + 1 >= poly.getListePunkte().size()) {
+					x2 = poly.getXAtIndex(0);
+					y2 = poly.getYAtIndex(0);
+				} else {
+					x2 = poly.getXAtIndex(i + 1);
+					y2 = poly.getYAtIndex(i + 1);
+				}
+				gc.strokeLine(x1, y1, x2, y2);
+			}
+		}
+	}
+
+	public synchronized void setBackgroundColor(double red, double green, double blue) {
+		gc.setFill(Color.color(red, green, blue));
+	}
+
+	public synchronized void setStrokeColor(double red, double green, double blue) {
+		gc.setStroke(Color.color(red, green, blue));
+	}
+
+	public synchronized void setModell(PolygonModell modell) {
+		this.modell = modell;
+	}
+
+	public PolygonModell getModell() {
+		return modell;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		zeichnePolygon(modell.getPolygon());
 	}
 }

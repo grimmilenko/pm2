@@ -9,6 +9,8 @@ package aufgabenblatt4;
 
 import static org.junit.Assert.*;
 
+import java.util.Observer;
+
 import org.junit.Test;
 
 /**
@@ -21,7 +23,7 @@ public class TestPolygonModell {
 
 	@Test
 	public void testBearbeitungZuEnde() {
-		PolygonModell test = new PolygonModell();
+		PolygonModell test = new PolygonModell((Observer) this);
 		test.getPolygon().setPunkt(1, 2);
 
 		Polygon akt = test.getPolygon();

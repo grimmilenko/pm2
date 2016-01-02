@@ -29,6 +29,8 @@ public class Gui extends Application {
 
 	private Stage primaryStage;
 	private Pane pane;
+	private TableView<Polygon> tabelle;
+	private PolygonTabelle polyTabelle;
 
 	/**
 	 * Breite und Hoehe der Anwendung
@@ -59,6 +61,11 @@ public class Gui extends Application {
 		pane = paneInit();
 		primaryStage.setScene(new Scene(pane, width, height));
 		primaryStage.show();
+		PolygonModell modell = new PolygonModell(polygonDarstellung);
+		polygonDarstellung.setModell(modell);
+		polyTabelle = new PolygonTabelle(this.tabelle, modell);
+		modell.bearbeitungZuEnde();
+		polyTabelle.initTabelle();
 	}
 
 	/**
@@ -104,16 +111,20 @@ public class Gui extends Application {
 	 */
 	private Pane befehlButtons() {
 		HBox pane = new HBox();
-		pane.setSpacing(10);
+		pane.setSpacing(5);
 		Button hilfe = new Button("?");
 		hilfe.setTooltip(new Tooltip("tooltip"));
 		Button befehl = new Button("Fuehre aus!");
 		Button fertig = new Button("Fertig");
+		fertig.setOnAction(event -> {
+			polygonDarstellung.getModell().bearbeitungZuEnde();
+			polyTabelle.refreshTabelle();
+		});
 		Button close = new Button("Exit");
 		close.setOnAction(event -> {
 			primaryStage.close();
 		});
-		pane.getChildren().addAll(hilfe, befehl, fertig, close);
+		pane.getChildren().addAll(befehl, hilfe, fertig, close);
 		return pane;
 	}
 
@@ -124,7 +135,7 @@ public class Gui extends Application {
 	 */
 	private Pane zeichenflaeche() {
 		StackPane pane = new StackPane();
-		polygonDarstellung = new PolygonDarstellung();
+		polygonDarstellung = new PolygonDarstellung(pane);
 		return pane;
 	}
 
@@ -136,8 +147,8 @@ public class Gui extends Application {
 	 */
 	private Pane polygonTabelle() {
 		BorderPane pane = new BorderPane();
-		TableView<Polygon> tablle = new TableView<Polygon>();
-		pane.setCenter(tablle);
+		tabelle = new TableView<Polygon>();
+		pane.setCenter(tabelle);
 		return pane;
 	}
 }
