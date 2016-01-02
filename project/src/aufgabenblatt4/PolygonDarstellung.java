@@ -43,7 +43,8 @@ public class PolygonDarstellung extends Canvas implements Observer {
 		gc = getGraphicsContext2D();
 
 		gc.setFill(Color.AQUAMARINE);
-		gc.setStroke(Color.BLACK);
+		gc.setStroke(Color.ORANGE);
+		//gc.setStroke(Color.BLACK);
 
 		pane.getChildren().add(this);
 		root = pane;
@@ -108,6 +109,8 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	 */
 	private synchronized void polygonZeichnung(Polygon poly) {
 		if (poly != null) {
+			gc.setStroke(Color.ORANGE);
+			
 			for (int i = 0; i < poly.getListePunkte().size(); i++) {
 				double x1 = poly.getXAtIndex(i);
 				double y1 = poly.getYAtIndex(i);
@@ -147,6 +150,7 @@ public class PolygonDarstellung extends Canvas implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		gc.setStroke(Color.BLACK);
 		zeichnePolygon(modell.getPolygon());
 	}
 }
