@@ -49,7 +49,7 @@ public class Gui extends Application {
 	}
 
 	/**
-	 * Default-Konstruktor
+	 * Default-Konstruktor mit fester Fenstergroesse
 	 */
 	public Gui() {
 		height = 600;
@@ -67,6 +67,14 @@ public class Gui extends Application {
 		polyTabelle = new PolygonTabelle(this.tabelle, modell);
 		polyTabelle.initTabelle();
 		primaryStage.show();
+
+		// Beispiel Polygon
+		Polygon polygonBsp = modell.getPolygon();
+		polygonBsp.setPunkt(25, 25);
+		polygonBsp.setPunkt(150.5, 75.5);
+		polygonBsp.setPunkt(50, 50);
+		modell.bearbeitungZuEnde();
+		polyTabelle.refreshTabelle();
 	}
 
 	/**
