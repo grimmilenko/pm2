@@ -42,9 +42,9 @@ public class PolygonDarstellung extends Canvas implements Observer {
 
 		gc = getGraphicsContext2D();
 
-		gc.setFill(Color.AQUAMARINE);
-		gc.setStroke(Color.ORANGE);
-		//gc.setStroke(Color.BLACK);
+		gc.setFill(Color.BISQUE);
+		gc.setStroke(Color.CHOCOLATE);
+		// gc.setStroke(Color.BLACK);
 
 		pane.getChildren().add(this);
 		root = pane;
@@ -97,8 +97,7 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	 *            Das zu zeichnende Polygon
 	 */
 	public synchronized void zeichnePolygon(Polygon poly) {
-		clearScreen();
-		polygonZeichnung(poly);
+		polygonZeichnung(poly, Color.CHOCOLATE);
 	}
 
 	/**
@@ -107,10 +106,10 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	 * @param poly
 	 *            Das zu zeichnende Polygon
 	 */
-	private synchronized void polygonZeichnung(Polygon poly) {
+	private synchronized void polygonZeichnung(Polygon poly, Color color) {
 		if (poly != null) {
-			gc.setStroke(Color.ORANGE);
-			
+			gc.setStroke(color);
+
 			for (int i = 0; i < poly.getListePunkte().size(); i++) {
 				double x1 = poly.getXAtIndex(i);
 				double y1 = poly.getYAtIndex(i);
@@ -118,8 +117,8 @@ public class PolygonDarstellung extends Canvas implements Observer {
 				double y2;
 				gc.strokeOval(x1 - 2.5, y1 - 2.5, 5, 5);
 				if (i + 1 >= poly.getListePunkte().size()) {
-					x2 = poly.getXAtIndex(0);
-					y2 = poly.getYAtIndex(0);
+					x2 = poly.getXAtIndex(i);
+					y2 = poly.getYAtIndex(i);
 				} else {
 					x2 = poly.getXAtIndex(i + 1);
 					y2 = poly.getYAtIndex(i + 1);
@@ -148,9 +147,17 @@ public class PolygonDarstellung extends Canvas implements Observer {
 		return modell;
 	}
 
+	public void zeichneFertigePolygone() {
+
+		for (int i = 0; i < modell.getListePolygone().size(); i++) {
+			polygonZeichnung(modell.getListePolygone().get(i), Color.BLACK);
+		}
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
-		gc.setStroke(Color.BLACK);
+		clearScreen();
 		zeichnePolygon(modell.getPolygon());
+		zeichneFertigePolygone();
 	}
 }

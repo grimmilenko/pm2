@@ -24,7 +24,7 @@ public class PolygonSkripting {
 	 * Konstruktor
 	 */
 	public PolygonSkripting() {
-		pattern = Pattern.compile("(bewege)\\s->" + "\\s(0|-?[0-9]*\\.?[0-9]*),(0|-?[0-9]*\\.?[0-9]*)");
+		pattern = Pattern.compile("(bewege)\\s->" + "\\s(0|-?[0-9]*\\.?[0-9]*),\\s?(0|-?[0-9]*\\.?[0-9]*)");
 		matcher = null;
 	}
 

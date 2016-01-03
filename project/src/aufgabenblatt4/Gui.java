@@ -53,7 +53,7 @@ public class Gui extends Application {
 	 */
 	public Gui() {
 		height = 600;
-		width = 600;
+		width = 1000;
 	}
 
 	@Override
@@ -62,11 +62,11 @@ public class Gui extends Application {
 		primaryStage.setTitle("Polygon-Zeicheneditor");
 		pane = paneInit();
 		primaryStage.setScene(new Scene(pane, width, height));
-		primaryStage.show();
 		PolygonModell modell = new PolygonModell(polygonDarstellung);
 		polygonDarstellung.setModell(modell);
 		polyTabelle = new PolygonTabelle(this.tabelle, modell);
 		polyTabelle.initTabelle();
+		primaryStage.show();
 	}
 
 	/**
@@ -115,10 +115,10 @@ public class Gui extends Application {
 		pane.setSpacing(5);
 		Button hilfe = new Button("?");
 		hilfe.setTooltip(new Tooltip(
-				"Um Punkte zu einem Polygon hinzuzufügen, können Sie entweder mit der Maus in die Zeichenfläche\n"
-						+ "auf die gewünschte Koordinate klicken oder mit Hilfe des Textfensters Befehle eingeben.\n"
+				"Um Punkte zu einem Polygon hinzuzufuegen, koennen Sie entweder mit der Maus in die Zeichenflaeche\n"
+						+ "auf die gewuenschte Koordinate klicken oder mit Hilfe des Textfensters Befehle eingeben.\n"
 						+ "Befehle haben folgende Struktur:\n" + "bewege -> Koordinate 1, Koordinate 2\n"
-						+ "Bsp.: bewege -> 52.01,1.456"));
+						+ "Bsp.:   bewege -> 52.01, 1.456   oder   bewege -> 54,123.45"));
 		Button befehl = new Button("Fuehre aus!");
 		befehl.setOnAction(event -> {
 			String text = area.getText();
