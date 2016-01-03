@@ -53,7 +53,7 @@ public class PolygonSkripting {
 		if (istGueltigerBefehl(befehl)) {
 			return new Double(matcher.group(3));
 		} else {
-			throw new Exception("Kein gültiger Befehl!");
+			throw new Exception("Kein gueltiger Befehl!");
 		}
 	}
 
@@ -70,7 +70,7 @@ public class PolygonSkripting {
 		if (istGueltigerBefehl(befehl)) {
 			return new Double(matcher.group(2));
 		} else {
-			throw new Exception("Kein gültiger Befehl!");
+			throw new Exception("Kein gueltiger Befehl!");
 		}
 	}
 

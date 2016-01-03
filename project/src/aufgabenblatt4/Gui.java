@@ -124,15 +124,17 @@ public class Gui extends Application {
 			String text = area.getText();
 			try {
 				polygonDarstellung.getModell().getPolygon().setPunkt(regAusdruck.getX(text), regAusdruck.getY(text));
+				area.clear();
 			} catch (Exception e) {
-				e.printStackTrace();
+				area.setText(e.getMessage() + " --- Bitte einen gueltigen Befehl eingeben!\n"
+						+ "-->> Siehe \"?\" fuer gueltige Befehle! <<--");
 			}
-			area.clear();
 		});
 		Button fertig = new Button("Fertig");
 		fertig.setOnAction(event -> {
 			polygonDarstellung.getModell().bearbeitungZuEnde();
 			polyTabelle.refreshTabelle();
+			area.clear();
 		});
 		Button close = new Button("Exit");
 		close.setOnAction(event -> {
