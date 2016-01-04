@@ -38,7 +38,7 @@ public class Gui extends Application {
 	/**
 	 * Breite und Hoehe der Anwendung
 	 */
-	private final int width, height;
+	private int width, height;
 
 	private PolygonDarstellung polygonDarstellung;
 
@@ -126,7 +126,8 @@ public class Gui extends Application {
 		hilfe.setTooltip(new Tooltip(
 				"Um Punkte zu einem Polygon hinzuzufuegen, koennen Sie entweder mit der Maus in die Zeichenflaeche\n"
 						+ "auf die gewuenschte Koordinate klicken oder mit Hilfe des Textfensters Befehle eingeben.\n"
-						+ "Befehle haben folgende Struktur:\n" + "bewege -> Koordinate 1, Koordinate 2\n"
+						+ "Befehle haben folgende Struktur:\n"
+						+ "bewege -> Koordinate 1, Koordinate 2\n"
 						+ "Bsp.:   bewege -> 52.01, 1.456   oder   bewege -> 54,123.45"));
 		Button befehl = new Button("Fuehre aus!");
 		hilfe.setOnMouseEntered(event -> hilfe.setEffect(new DropShadow()));
@@ -134,10 +135,15 @@ public class Gui extends Application {
 		befehl.setOnAction(event -> {
 			String text = area.getText();
 			try {
-				polygonDarstellung.getModell().getPolygon().setPunkt(regAusdruck.getX(text), regAusdruck.getY(text));
+				polygonDarstellung
+						.getModell()
+						.getPolygon()
+						.setPunkt(regAusdruck.getX(text),
+								regAusdruck.getY(text));
 				area.clear();
 			} catch (Exception e) {
-				area.setText(e.getMessage() + " --- Bitte einen gueltigen Befehl eingeben!\n"
+				area.setText(e.getMessage()
+						+ " --- Bitte einen gueltigen Befehl eingeben!\n"
 						+ "-->> Siehe \"?\" fuer gueltige Befehle! <<--");
 			}
 		});

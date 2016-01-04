@@ -21,7 +21,7 @@ public class TestPolygonModell {
 
 	@Test
 	public void testBearbeitungZuEnde() {
-		PolygonModell test = new PolygonModell();
+		PolygonModell test = new PolygonModell(new PolygonModell());
 		test.getPolygon().setPunkt(1, 2);
 
 		Polygon akt = test.getPolygon();

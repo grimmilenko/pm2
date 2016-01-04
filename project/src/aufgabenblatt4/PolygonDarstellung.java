@@ -38,7 +38,7 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	 *            soll
 	 */
 	public PolygonDarstellung(StackPane pane) {
-		super(350, 350);
+		super(750, 525);
 
 		gc = getGraphicsContext2D();
 
@@ -51,6 +51,11 @@ public class PolygonDarstellung extends Canvas implements Observer {
 
 			@Override
 			public void invalidated(javafx.beans.Observable observable) {
+				
+				clearScreen();
+				zeichnePolygon(modell.getPolygon());
+				zeichneFertigePolygone();
+				
 				setWindow();
 				if (modell != null) {
 					zeichnePolygon(modell.getPolygon());
@@ -62,15 +67,16 @@ public class PolygonDarstellung extends Canvas implements Observer {
 		root.widthProperty().addListener(listener);
 		root.heightProperty().addListener(listener);
 
-		addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		addEventHandler(MouseEvent.MOUSE_CLICKED,
+				new EventHandler<MouseEvent>() {
 
-			@Override
-			public void handle(MouseEvent event) {
-				Polygon aktuellesPolygon = modell.getPolygon();
-				aktuellesPolygon.setPunkt(event.getX(), event.getY());
-				event.consume();
-			}
-		});
+					@Override
+					public void handle(MouseEvent event) {
+						Polygon aktuellesPolygon = modell.getPolygon();
+						aktuellesPolygon.setPunkt(event.getX(), event.getY());
+						event.consume();
+					}
+				});
 	}
 
 	/**
