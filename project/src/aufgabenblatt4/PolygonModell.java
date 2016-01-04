@@ -46,6 +46,13 @@ public class PolygonModell extends Observable implements Observer {
 	}
 
 	/**
+	 * Default Konstruktor, nur fuer die Testklasse geeignet
+	 */
+	public PolygonModell() {
+		aktuellesPolygon = new Polygon(this);
+	}
+
+	/**
 	 * Kostruktor
 	 * 
 	 * @param polygon

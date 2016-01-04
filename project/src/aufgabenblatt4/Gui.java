@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -128,6 +129,8 @@ public class Gui extends Application {
 						+ "Befehle haben folgende Struktur:\n" + "bewege -> Koordinate 1, Koordinate 2\n"
 						+ "Bsp.:   bewege -> 52.01, 1.456   oder   bewege -> 54,123.45"));
 		Button befehl = new Button("Fuehre aus!");
+		hilfe.setOnMouseEntered(event -> hilfe.setEffect(new DropShadow()));
+		hilfe.setOnMouseExited(event -> hilfe.setEffect(null));
 		befehl.setOnAction(event -> {
 			String text = area.getText();
 			try {
@@ -138,16 +141,22 @@ public class Gui extends Application {
 						+ "-->> Siehe \"?\" fuer gueltige Befehle! <<--");
 			}
 		});
+		befehl.setOnMouseEntered(event -> befehl.setEffect(new DropShadow()));
+		befehl.setOnMouseExited(event -> befehl.setEffect(null));
 		Button fertig = new Button("Fertig");
 		fertig.setOnAction(event -> {
 			polygonDarstellung.getModell().bearbeitungZuEnde();
 			polyTabelle.refreshTabelle();
 			area.clear();
 		});
+		fertig.setOnMouseEntered(event -> fertig.setEffect(new DropShadow()));
+		fertig.setOnMouseExited(event -> fertig.setEffect(null));
 		Button close = new Button("Exit");
 		close.setOnAction(event -> {
 			primaryStage.close();
 		});
+		close.setOnMouseEntered(event -> close.setEffect(new DropShadow()));
+		close.setOnMouseExited(event -> close.setEffect(null));
 		pane.getChildren().addAll(befehl, hilfe, fertig, close);
 		return pane;
 	}

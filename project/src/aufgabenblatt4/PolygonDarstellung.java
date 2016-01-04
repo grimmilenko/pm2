@@ -44,7 +44,6 @@ public class PolygonDarstellung extends Canvas implements Observer {
 
 		gc.setFill(Color.BISQUE);
 		gc.setStroke(Color.CHOCOLATE);
-		// gc.setStroke(Color.BLACK);
 
 		pane.getChildren().add(this);
 		root = pane;
