@@ -17,7 +17,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -173,7 +172,7 @@ public class Gui extends Application {
 	 * @return Gibt die PolygonDarstellung zurueck
 	 */
 	private Pane zeichenflaeche() {
-		StackPane pane = new StackPane();
+		BorderPane pane = new BorderPane();
 		polygonDarstellung = new PolygonDarstellung(pane);
 		return pane;
 	}

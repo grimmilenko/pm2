@@ -15,7 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 /**
@@ -26,7 +26,7 @@ import javafx.scene.paint.Color;
  */
 public class PolygonDarstellung extends Canvas implements Observer {
 	private GraphicsContext gc;
-	private StackPane root;
+	private BorderPane root;
 	private InvalidationListener listener;
 	private PolygonModell modell;
 
@@ -37,7 +37,7 @@ public class PolygonDarstellung extends Canvas implements Observer {
 	 *            Die StackPane auf der die PolygonDarstellung gezeichnet werden
 	 *            soll
 	 */
-	public PolygonDarstellung(StackPane pane) {
+	public PolygonDarstellung(BorderPane pane) {
 		super(750, 525);
 
 		gc = getGraphicsContext2D();
